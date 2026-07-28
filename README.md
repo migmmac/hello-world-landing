@@ -4,41 +4,68 @@ A simple static landing page deployed with [GitHub Pages](https://pages.github.c
 
 ## Local preview
 
-Open `index.html` in a browser, or run:
-
 ```bash
+cd ~/Projects/hello-world-landing
 python3 -m http.server 8080
 ```
 
-Then visit http://localhost:8080.
+Open http://localhost:8080
 
-## Deploy to GitHub (same as `dgac-app`)
+---
 
-This project is set up like **`dgac-app`**: account **migmmac**, HTTPS remote  
-`https://github.com/migmmac/hello-world-landing.git`, and **GitHub Desktop** for auth (no `gh` CLI required).
+## Deploy with GitHub Desktop (same idea as `dgac-app`)
 
-1. Open **GitHub Desktop** (you should already be signed in as **migmmac**).
-2. **File → Add local repository…** → choose this folder:
-   `~/Projects/hello-world-landing`
-3. Click **Publish repository** (or **Push origin** if the repo already exists on GitHub).
-   - Name: `hello-world-landing`
-   - Keep **Public** if you want a free GitHub Pages URL.
-4. On GitHub in the browser: open **migmmac/hello-world-landing → Settings → Pages**.
-   - **Build and deployment → Source:** GitHub Actions
-5. After the **Deploy to GitHub Pages** workflow finishes (about a minute):
+Your GitHub user is **migmmac**. The site will be at:
 
-   **https://migmmac.github.io/hello-world-landing/**
+**https://migmmac.github.io/hello-world-landing/**
 
-## Optional: terminal push (HTTPS)
+(That URL only works **after** the repo exists on GitHub and Pages is turned on.)
 
-If GitHub Desktop is signed in, HTTPS push uses the same login as Desktop:
+### Step 1 — Open the project in Desktop
 
-```bash
-cd ~/Projects/hello-world-landing
-git push -u origin main
-```
+1. Open **GitHub Desktop**.
+2. **File → Add local repository…**
+3. Choose: `/Users/miguel/Projects/hello-world-landing`
+4. Click **Add repository**.
 
-## Troubleshooting
+### Step 2 — Publish to GitHub (creates the repo)
 
-- **`gh auth login` not required** — `dgac-app` does not use the GitHub CLI either.
-- If push fails in Terminal, use **GitHub Desktop → Push origin** instead; that is the path that worked for `dgac-app`.
+This is the step that was missing: the repo must be **created on GitHub** first.
+
+1. In the top bar, click the blue **Publish repository** button.  
+   - If you only see **Push origin** and it fails with “repository not found”, the remote was wrong. This project is configured so **Publish repository** should appear instead.
+2. In the dialog:
+   - **Name:** `hello-world-landing`
+   - **Description:** optional
+   - **Keep this code private:** leave **unchecked** (public → free GitHub Pages on `github.io`)
+3. Click **Publish repository**.
+4. Wait until Desktop finishes without errors.
+
+**Check:** in your browser, open https://github.com/migmmac/hello-world-landing — you should see your files (`index.html`, README), not a 404.
+
+### Step 3 — Turn on GitHub Pages (in the browser)
+
+Do this only **after** Step 2 works.
+
+1. Go to https://github.com/migmmac/hello-world-landing
+2. Click **Settings** (top tab on the repo, not your profile settings).
+3. Left sidebar → **Pages**.
+4. Under **Build and deployment** → **Source**, open the dropdown and choose **Deploy from a branch**.
+5. Under **Branch**:
+   - Branch: **main**
+   - Folder: **/ (root)**
+6. Click **Save**.
+
+After 1–3 minutes, open **https://migmmac.github.io/hello-world-landing/** again.
+
+### If Step 2 is confusing
+
+| What you see in Desktop | What to do |
+|-------------------------|------------|
+| **Publish repository** (blue) | Use Step 2 above — this creates `migmmac/hello-world-landing`. |
+| **Push origin** + error “not found” | **Repository → Repository settings → Remote** — remove the remote, or run in Terminal: `git remote remove origin`, then restart Desktop; **Publish repository** should appear. |
+| No button to publish | **Repository → Push** or sign in again as **migmmac** (GitHub Desktop → Settings → Accounts). |
+
+### Optional: GitHub Actions deploy
+
+This repo also includes `.github/workflows/pages.yml`. If you prefer Actions instead of “Deploy from a branch”, pick **GitHub Actions** as the Pages source in Step 3. Either method is fine for this site.
