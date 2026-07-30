@@ -23,12 +23,6 @@
       font-family: "Outfit", system-ui, sans-serif;
       background: #1c2418;
       color: #f2efe8;
-      cursor: none;
-    }
-
-    @media (hover: none) {
-      body { cursor: auto; }
-      .cursor { display: none !important; }
     }
 
     a { color: inherit; text-decoration: none; }
@@ -50,7 +44,6 @@
       background: rgba(0, 0, 0, 0.25);
       backdrop-filter: blur(12px);
       color: #fff;
-      cursor: none;
     }
 
     body.is-studio .switcher {
@@ -134,7 +127,6 @@
       padding: 0.9rem 1.25rem;
       border: 1px solid transparent;
       transition: transform 0.2s ease, background 0.2s ease;
-      cursor: none;
     }
 
     .btn:hover { transform: translateY(-1px); }
@@ -313,51 +305,6 @@
       opacity: 0.45;
       text-align: left;
     }
-
-    /* cursors */
-    .cursor {
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 22px;
-      height: 22px;
-      margin: -11px 0 0 -11px;
-      pointer-events: none;
-      z-index: 50;
-      transform: translate3d(-100px, -100px, 0);
-      will-change: transform;
-    }
-
-    .cursor-road,
-    .cursor-studio {
-      position: absolute;
-      inset: 0;
-    }
-
-    .cursor-road {
-      border-radius: 50%;
-      border: 2px solid #f0d045;
-      background: rgba(193, 18, 31, 0.85);
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2), 0 0 14px rgba(240, 208, 69, 0.35);
-    }
-
-    .cursor-road::after {
-      content: "";
-      position: absolute;
-      inset: 5px;
-      border-radius: 50%;
-      border: 1px solid rgba(240, 208, 69, 0.7);
-    }
-
-    .cursor-studio {
-      display: none;
-      border-radius: 50%;
-      background: radial-gradient(circle at 32% 28%, #ffe0c8 0%, #ff8a55 45%, #c44520 100%);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
-
-    body.is-studio .cursor-road { display: none; }
-    body.is-studio .cursor-studio { display: block; }
   </style>
 </head>
 <body>
@@ -481,11 +428,6 @@
     <footer class="footer">Studio Lau · Santa Teresa</footer>
   </div>
 
-  <div class="cursor" aria-hidden="true">
-    <div class="cursor-road"></div>
-    <div class="cursor-studio"></div>
-  </div>
-
   <script>
     (() => {
       const root = document.documentElement;
@@ -493,10 +435,8 @@
       const road = document.querySelector(".theme-road");
       const studio = document.querySelector(".theme-studio");
       const switcher = document.getElementById("theme-switch");
-      const cursor = document.querySelector(".cursor");
 
       let targetX = 0.5, targetY = 0.5, currentX = 0.5, currentY = 0.5;
-      let mousePx = -100, mousePy = -100;
       let studioMode = false;
       const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -518,8 +458,6 @@
       window.addEventListener("pointermove", (e) => {
         targetX = e.clientX / window.innerWidth;
         targetY = e.clientY / window.innerHeight;
-        mousePx = e.clientX;
-        mousePy = e.clientY;
       }, { passive: true });
 
       function frame() {
@@ -530,7 +468,6 @@
         root.style.setProperty("--my", `${(currentY * 100).toFixed(2)}%`);
         root.style.setProperty("--px", ((currentX - 0.5) * 2).toFixed(3));
         root.style.setProperty("--py", ((currentY - 0.5) * 2).toFixed(3));
-        cursor.style.transform = `translate3d(${mousePx}px, ${mousePy}px, 0)`;
         requestAnimationFrame(frame);
       }
 
