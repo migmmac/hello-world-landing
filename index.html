@@ -13,27 +13,22 @@
       --my: 50%;
       --px: 0;
       --py: 0;
-      --vx: 0;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: "Outfit", system-ui, sans-serif;
-      background: #1a2a1c;
-      color: #f4f1ea;
+      background: #1c2418;
+      color: #f2efe8;
       cursor: none;
     }
 
     @media (hover: none) {
       body { cursor: auto; }
-      .cursor, .cursor-ring { display: none; }
+      .cursor { display: none !important; }
     }
 
     a { color: inherit; text-decoration: none; }
@@ -46,435 +41,290 @@
       top: 1.25rem;
       right: 1.25rem;
       z-index: 40;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      padding: 0.7rem 1rem;
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      background: rgba(10, 20, 16, 0.35);
-      backdrop-filter: blur(10px);
+      padding: 0.65rem 0.95rem;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      background: rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(12px);
       color: #fff;
       cursor: none;
-      transition: background 0.25s ease, border-color 0.25s ease;
     }
 
     body.is-studio .switcher {
-      border-color: rgba(255, 255, 255, 0.45);
-      background: rgba(12, 55, 62, 0.4);
+      background: rgba(255, 255, 255, 0.12);
     }
 
-    .switcher:hover { background: rgba(255, 255, 255, 0.12); }
-
-    /* ——— QUINTA RURAL ——— */
-    .theme-road { color: #f3efe6; }
-
+    /* ——— QUINTA ——— */
     .theme-road .hero {
       position: relative;
       min-height: 100vh;
       min-height: 100dvh;
-      display: flex;
-      align-items: flex-end;
+      display: grid;
+      align-items: end;
       overflow: hidden;
-      isolation: isolate;
     }
 
     .theme-road .scene {
       position: absolute;
       inset: 0;
-      z-index: 0;
       background:
-        radial-gradient(
-          900px circle at var(--mx) var(--my),
-          rgba(255, 236, 190, 0.45) 0%,
-          transparent 45%
-        ),
-        linear-gradient(
-          180deg,
-          #87b8d6 0%,
-          #9ec4d8 18%,
-          #b7c9a8 42%,
-          #8fa86a 58%,
-          #6b8a4e 72%,
-          #4d6a3c 88%,
-          #3a5230 100%
+        radial-gradient(ellipse 70% 55% at var(--mx) var(--my), rgba(255, 220, 150, 0.28), transparent 55%),
+        linear-gradient(185deg,
+          #7eafc8 0%,
+          #9bb8a6 28%,
+          #b8a86a 52%,
+          #7d8f4e 74%,
+          #3f5234 100%
+        );
+      transform: scale(1.04) translate3d(calc(var(--px) * -8px), calc(var(--py) * -5px), 0);
+      will-change: transform;
+    }
+
+    .theme-road .scene::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 50% 30% at 20% 15%, rgba(255, 255, 255, 0.22), transparent),
+        radial-gradient(ellipse 40% 22% at 78% 12%, rgba(255, 255, 255, 0.16), transparent);
+      transform: translate3d(calc(var(--px) * -16px), 0, 0);
+    }
+
+    .theme-road .scene::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, transparent 40%, rgba(20, 28, 16, 0.55) 72%, rgba(16, 22, 14, 0.92) 100%),
+        repeating-linear-gradient(
+          -12deg,
+          transparent 0 18px,
+          rgba(255, 255, 255, 0.015) 18px 19px
         );
     }
 
-    .theme-road .clouds {
+    .theme-road .road-line {
       position: absolute;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.55;
-      transform: translate3d(calc(var(--px) * -20px), calc(var(--py) * -8px), 0);
-      will-change: transform;
-      background:
-        radial-gradient(ellipse 180px 50px at 18% 18%, rgba(255, 255, 255, 0.55), transparent 70%),
-        radial-gradient(ellipse 220px 60px at 28% 16%, rgba(255, 255, 255, 0.4), transparent 70%),
-        radial-gradient(ellipse 160px 45px at 72% 22%, rgba(255, 255, 255, 0.45), transparent 70%),
-        radial-gradient(ellipse 200px 55px at 85% 14%, rgba(255, 255, 255, 0.35), transparent 70%);
-    }
-
-    .theme-road .sun {
-      position: absolute;
-      width: min(22vw, 200px);
-      height: min(22vw, 200px);
-      top: 9%;
-      right: 16%;
-      border-radius: 50%;
-      background: radial-gradient(circle at 42% 38%, #fff9e8 0%, #ffe08a 28%, #ffb84a 55%, rgba(255, 170, 60, 0) 72%);
-      box-shadow: 0 0 80px rgba(255, 200, 100, 0.35);
-      transform: translate3d(calc(var(--px) * -22px), calc(var(--py) * 10px), 0);
-      pointer-events: none;
-      will-change: transform;
-    }
-
-    .theme-road .hills {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      will-change: transform;
-    }
-
-    .theme-road .hills svg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    .theme-road .hills--far {
-      transform: translate3d(calc(var(--px) * -12px), calc(var(--py) * -5px), 0);
-    }
-
-    .theme-road .hills--mid {
-      transform: translate3d(calc(var(--px) * -24px), calc(var(--py) * -9px), 0);
-    }
-
-    .theme-road .hills--near {
-      transform: translate3d(calc(var(--px) * -38px), calc(var(--py) * -14px), 0);
-    }
-
-    .hill-far { fill: #7ea07a; }
-    .hill-mid { fill: #5f8654; }
-    .hill-near { fill: #456a3d; }
-    .field { fill: #6f9248; opacity: 0.55; }
-    .tree-canopy { fill: #2f4a2c; }
-    .tree-trunk { fill: #4a3524; }
-    .tree-cork { fill: #3d4f2e; }
-
-    .theme-road .roads {
-      position: absolute;
-      inset: -6%;
-      width: 112%;
-      height: 112%;
-      transform: translate3d(calc(var(--px) * -44px), calc(var(--py) * -18px), 0);
-      pointer-events: none;
-      will-change: transform;
-    }
-
-    .theme-road .roads svg { width: 100%; height: 100%; }
-
-    .road-path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
-    .road-path--shoulder { stroke: rgba(245, 240, 230, 0.35); stroke-width: 46; }
-    .road-path--base { stroke: #3a3e44; stroke-width: 38; }
-    .road-path--lane {
-      stroke: #f0d045;
-      stroke-width: 2.5;
-      stroke-dasharray: 24 14;
-      animation: dash-flow 1.5s linear infinite;
-    }
-
-    @keyframes dash-flow { to { stroke-dashoffset: -76; } }
-
-    .theme-road .bike-hero {
-      position: absolute;
-      right: 4%;
-      bottom: 14%;
-      width: min(52vw, 520px);
-      z-index: 1;
-      pointer-events: none;
-      filter: drop-shadow(0 28px 40px rgba(10, 20, 14, 0.45));
-      transform: translate3d(calc(var(--px) * 28px), calc(var(--py) * 14px), 0)
-                 rotate(calc(var(--px) * -3deg));
-      will-change: transform;
-      opacity: 0.95;
-    }
-
-    .theme-road .bike-hero svg {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .theme-road .hero-shade {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      background: linear-gradient(180deg, transparent 28%, rgba(18, 28, 20, 0.45) 65%, rgba(12, 20, 14, 0.9) 100%);
+      left: -10%;
+      right: -10%;
+      bottom: 22%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(240, 208, 69, 0.7), transparent);
+      transform: translate3d(calc(var(--px) * -30px), calc(var(--py) * -8px), 0) rotate(-4deg);
+      box-shadow: 0 0 0 18px rgba(40, 44, 48, 0.35);
       pointer-events: none;
     }
 
     .theme-road .hero-content {
       position: relative;
-      z-index: 3;
-      width: min(720px, 100%);
-      padding: clamp(1.5rem, 5vw, 4rem);
-      padding-bottom: clamp(3rem, 8vw, 5.5rem);
-      transform: translate3d(calc(var(--px) * 10px), calc(var(--py) * 5px), 0);
-      will-change: transform;
+      z-index: 2;
+      padding: clamp(2rem, 6vw, 5rem);
+      max-width: 40rem;
+      transform: translate3d(calc(var(--px) * 6px), calc(var(--py) * 3px), 0);
     }
 
     .theme-road .brand {
       font-family: "Bebas Neue", sans-serif;
-      font-size: clamp(4rem, 14vw, 8.5rem);
-      line-height: 0.88;
-      letter-spacing: 0.03em;
+      font-size: clamp(4.2rem, 13vw, 8rem);
+      line-height: 0.9;
+      letter-spacing: 0.04em;
       margin-bottom: 1rem;
     }
 
     .theme-road .brand span {
-      display: block;
       color: #f0d045;
     }
 
     .theme-road .lead {
-      font-size: clamp(1.05rem, 2.2vw, 1.25rem);
-      line-height: 1.5;
-      color: rgba(243, 239, 230, 0.88);
-      max-width: 30rem;
+      font-size: clamp(1.05rem, 2vw, 1.2rem);
+      line-height: 1.55;
+      color: rgba(242, 239, 232, 0.85);
       margin-bottom: 1.75rem;
+      max-width: 28rem;
     }
 
-    .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 0.7rem; }
 
     .btn {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       font-weight: 700;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      padding: 0.95rem 1.35rem;
+      padding: 0.9rem 1.25rem;
       border: 1px solid transparent;
-      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      transition: transform 0.2s ease, background 0.2s ease;
       cursor: none;
     }
 
-    .btn:hover { transform: translateY(-2px); }
+    .btn:hover { transform: translateY(-1px); }
 
     .theme-road .btn-primary { background: #f0d045; color: #1a2418; }
-    .theme-road .btn-secondary {
-      border-color: rgba(243, 239, 230, 0.45);
-      color: #f3efe6;
-      background: transparent;
+    .theme-road .btn-ghost {
+      border-color: rgba(242, 239, 232, 0.4);
+      color: #f2efe8;
     }
-    .theme-road .btn-secondary:hover { background: rgba(243, 239, 230, 0.1); }
 
     .section {
-      position: relative;
-      padding: clamp(3.5rem, 9vw, 7rem) clamp(1.5rem, 5vw, 4rem);
+      padding: clamp(3.5rem, 8vw, 6.5rem) clamp(1.5rem, 5vw, 4rem);
     }
 
-    .section-inner { width: min(1100px, 100%); margin: 0 auto; }
+    .section-inner { width: min(980px, 100%); margin: 0 auto; }
 
     .section h2 {
       font-family: "Bebas Neue", sans-serif;
-      font-size: clamp(2.4rem, 7vw, 4rem);
+      font-size: clamp(2.2rem, 6vw, 3.4rem);
       letter-spacing: 0.04em;
-      line-height: 0.95;
-      margin-bottom: 0.85rem;
+      margin-bottom: 0.75rem;
     }
 
     .section .support {
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       line-height: 1.55;
-      max-width: 34rem;
-      opacity: 0.78;
-      margin-bottom: 2.5rem;
+      max-width: 32rem;
+      opacity: 0.72;
+      margin-bottom: 2.25rem;
     }
-
-    .theme-road .section-offer { background: #162018; }
 
     .offer-list {
-      display: grid;
-      gap: 2rem 3rem;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       list-style: none;
+      display: grid;
+      gap: 1.75rem 2.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
 
-    .offer-list li h3 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 0.45rem;
-    }
-
-    .offer-list li p {
+    .offer-list h3 {
       font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .offer-list p {
+      font-size: 0.92rem;
       line-height: 1.5;
-      opacity: 0.7;
+      opacity: 0.65;
     }
 
-    .theme-road .section-route {
-      background:
-        radial-gradient(600px circle at var(--mx) var(--my), rgba(240, 208, 69, 0.12), transparent 50%),
-        #1e2c20;
-    }
+    .theme-road .section-offer { background: #151c13; }
+    .theme-road .section-route { background: #1a2417; }
+    .theme-road .section-stay { background: #10160f; }
 
-    .theme-road .route-note {
+    .theme-road .quote {
       font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: clamp(1.5rem, 3.5vw, 2.1rem);
       font-style: italic;
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
       line-height: 1.35;
-      max-width: 30rem;
       color: #f0d045;
+      max-width: 28rem;
     }
-
-    .theme-road .section-stay { background: #101812; }
 
     .theme-road .footer {
-      background: #0c120e;
-      padding: 2rem clamp(1.5rem, 5vw, 4rem);
-      font-size: 0.8rem;
-      letter-spacing: 0.08em;
+      padding: 1.75rem clamp(1.5rem, 5vw, 4rem);
+      background: #0c110b;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      opacity: 0.55;
+      opacity: 0.45;
     }
 
     /* ——— STUDIO LAU ——— */
-    .theme-studio {
-      color: #fffaf2;
-      background: #0f3d42;
-    }
+    .theme-studio { background: #123f45; color: #faf7f1; }
 
     .theme-studio .hero {
       position: relative;
       min-height: 100vh;
       min-height: 100dvh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      isolation: isolate;
+      display: grid;
+      place-items: center;
       text-align: center;
+      overflow: hidden;
     }
 
     .theme-studio .scene {
       position: absolute;
       inset: 0;
-      z-index: 0;
       background:
-        radial-gradient(
-          720px circle at var(--mx) var(--my),
-          rgba(255, 210, 120, 0.4) 0%,
-          transparent 42%
-        ),
-        linear-gradient(180deg, #57b4d0 0%, #4eb8aa 36%, #2f8f8a 68%, #17656c 100%);
-    }
-
-    .theme-studio .bloom {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(70px);
-      pointer-events: none;
+        radial-gradient(ellipse 60% 50% at var(--mx) var(--my), rgba(255, 210, 140, 0.35), transparent 55%),
+        linear-gradient(165deg, #5eb3c9 0%, #3fa39a 45%, #1c6b72 100%);
+      transform: scale(1.04) translate3d(calc(var(--px) * -8px), calc(var(--py) * -5px), 0);
       will-change: transform;
     }
 
-    .theme-studio .bloom--1 {
-      width: min(50vw, 480px);
-      height: min(50vw, 480px);
-      background: rgba(255, 130, 80, 0.28);
-      top: -8%;
-      left: -6%;
-      transform: translate3d(calc(var(--px) * 36px), calc(var(--py) * 24px), 0);
-    }
-
-    .theme-studio .bloom--2 {
-      width: min(44vw, 400px);
-      height: min(44vw, 400px);
-      background: rgba(60, 210, 180, 0.28);
-      right: -4%;
-      bottom: 10%;
-      transform: translate3d(calc(var(--px) * -30px), calc(var(--py) * -20px), 0);
-    }
-
-    .theme-studio .reformer {
-      position: absolute;
-      right: 6%;
-      bottom: 10%;
-      width: min(48vw, 460px);
-      z-index: 1;
-      pointer-events: none;
-      filter: drop-shadow(0 24px 36px rgba(0, 40, 50, 0.35));
-      transform: translate3d(calc(var(--px) * -22px), calc(var(--py) * 12px), 0)
-                 rotate(calc(var(--px) * 2deg));
-      will-change: transform;
-      opacity: 0.92;
-    }
-
-    .theme-studio .reformer svg {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .theme-studio .arcs {
-      position: absolute;
-      inset: -8%;
-      width: 116%;
-      height: 116%;
-      transform: translate3d(calc(var(--px) * -24px), calc(var(--py) * -14px), 0);
-      pointer-events: none;
-      opacity: 0.55;
-      will-change: transform;
-    }
-
-    .theme-studio .arcs svg { width: 100%; height: 100%; }
-
-    .arc-line {
-      fill: none;
-      stroke: rgba(255, 255, 255, 0.3);
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-dasharray: 10 14;
-      animation: arc-flow 2.4s linear infinite;
-    }
-
-    .arc-line--bold {
-      stroke: rgba(255, 120, 70, 0.5);
-      stroke-width: 3;
-      stroke-dasharray: 18 12;
-      animation-duration: 1.6s;
-    }
-
-    @keyframes arc-flow { to { stroke-dashoffset: -64; } }
-
-    .theme-studio .hero-shade {
+    .theme-studio .scene::after {
+      content: "";
       position: absolute;
       inset: 0;
-      z-index: 2;
-      background: linear-gradient(180deg, rgba(10, 50, 55, 0.12) 0%, rgba(10, 45, 50, 0.4) 100%);
+      background: linear-gradient(180deg, rgba(10, 45, 50, 0.08), rgba(10, 40, 46, 0.35));
+    }
+
+    /* reformer as elegant abstract rails — not clipart */
+    .theme-studio .reformer {
+      position: absolute;
+      left: 50%;
+      bottom: 16%;
+      width: min(70vw, 640px);
+      height: 56px;
+      transform: translate3d(calc(-50% + var(--px) * -18px), calc(var(--py) * 8px), 0);
       pointer-events: none;
+      opacity: 0.85;
+      will-change: transform;
+    }
+
+    .theme-studio .reformer .rail {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(250, 247, 241, 0.55);
+    }
+
+    .theme-studio .reformer .rail:nth-child(1) { top: 18px; }
+    .theme-studio .reformer .rail:nth-child(2) { top: 34px; background: rgba(250, 247, 241, 0.28); }
+
+    .theme-studio .reformer .carriage {
+      position: absolute;
+      top: 8px;
+      left: 38%;
+      width: 22%;
+      height: 28px;
+      border-radius: 4px;
+      background: rgba(250, 247, 241, 0.92);
+      box-shadow: 0 8px 24px rgba(0, 30, 35, 0.2);
+      transform: translateX(calc(var(--px) * 40px));
+      will-change: transform;
+    }
+
+    .theme-studio .reformer .carriage::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      right: 18%;
+      width: 8px;
+      height: 14px;
+      border-radius: 3px;
+      background: #ff7a45;
+      box-shadow: 14px 0 0 #ff7a45;
     }
 
     .theme-studio .hero-content {
       position: relative;
-      z-index: 3;
-      padding: clamp(1.5rem, 5vw, 4rem);
-      max-width: 760px;
-      transform: translate3d(calc(var(--px) * 8px), calc(var(--py) * 5px), 0);
-      will-change: transform;
+      z-index: 2;
+      padding: clamp(2rem, 6vw, 4rem);
+      max-width: 38rem;
+      transform: translate3d(calc(var(--px) * 5px), calc(var(--py) * 3px), 0);
     }
 
     .theme-studio .brand {
-      font-family: "Outfit", system-ui, sans-serif;
-      font-size: clamp(4.2rem, 14vw, 8rem);
+      font-size: clamp(4rem, 12vw, 7.2rem);
       font-weight: 700;
       letter-spacing: -0.03em;
-      line-height: 0.92;
+      line-height: 0.95;
       margin-bottom: 1rem;
-      text-shadow: 0 8px 30px rgba(0, 40, 50, 0.25);
     }
 
     .theme-studio .brand em {
@@ -485,213 +335,108 @@
     }
 
     .theme-studio .lead {
-      font-size: clamp(1.05rem, 2.3vw, 1.25rem);
+      font-size: clamp(1.05rem, 2.1vw, 1.2rem);
       line-height: 1.55;
-      color: rgba(255, 250, 242, 0.9);
+      color: rgba(250, 247, 241, 0.88);
+      margin: 0 auto 1.75rem;
       max-width: 26rem;
-      margin: 0 auto 1.85rem;
     }
 
-    .theme-studio .btn-primary { background: #fffaf2; color: #15565c; }
-    .theme-studio .btn-secondary {
-      border-color: rgba(255, 250, 242, 0.5);
-      color: #fffaf2;
-      background: transparent;
-    }
-    .theme-studio .btn-secondary:hover { background: rgba(255, 250, 242, 0.1); }
     .theme-studio .cta-row { justify-content: center; }
+    .theme-studio .btn-primary { background: #faf7f1; color: #15565c; }
+    .theme-studio .btn-ghost {
+      border-color: rgba(250, 247, 241, 0.45);
+      color: #faf7f1;
+    }
 
-    .theme-studio .section-method { background: #12484e; }
+    .theme-studio .section-method { background: #10464c; }
+    .theme-studio .section-place { background: #0e3a40; }
+    .theme-studio .section-book { background: #0b3035; }
 
-    .theme-studio .section-method h2,
-    .theme-studio .section-place h2,
-    .theme-studio .section-book h2 {
+    .theme-studio .section h2 {
       font-family: "Outfit", system-ui, sans-serif;
       font-weight: 700;
       letter-spacing: -0.02em;
     }
 
-    .theme-studio .section-place {
-      background:
-        radial-gradient(560px circle at var(--mx) var(--my), rgba(255, 180, 100, 0.14), transparent 55%),
-        #0f3d42;
-    }
-
-    .theme-studio .place-line {
+    .theme-studio .quote {
       font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: clamp(1.55rem, 3.6vw, 2.2rem);
       font-style: italic;
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
       line-height: 1.35;
-      max-width: 30rem;
       color: #ffd27a;
+      max-width: 28rem;
     }
-
-    .theme-studio .section-book { background: #0c3338; }
 
     .theme-studio .footer {
-      background: #09282c;
-      padding: 2rem clamp(1.5rem, 5vw, 4rem);
-      font-size: 0.8rem;
-      letter-spacing: 0.08em;
+      padding: 1.75rem clamp(1.5rem, 5vw, 4rem);
+      background: #082428;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      opacity: 0.55;
+      opacity: 0.45;
       text-align: center;
     }
 
-    /* ——— CURSORS ——— */
+    /* cursors */
     .cursor {
       position: fixed;
       left: 0;
       top: 0;
+      width: 22px;
+      height: 22px;
+      margin: -11px 0 0 -11px;
       pointer-events: none;
       z-index: 50;
-      width: 34px;
-      height: 34px;
-      margin: -17px 0 0 -17px;
       transform: translate3d(-100px, -100px, 0);
       will-change: transform;
     }
 
-    .cursor svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-      overflow: visible;
+    .cursor-road,
+    .cursor-studio {
+      position: absolute;
+      inset: 0;
     }
 
-    .cursor-road { display: block; }
-    .cursor-studio { display: none; }
+    .cursor-road {
+      border-radius: 50%;
+      border: 2px solid #f0d045;
+      background: rgba(193, 18, 31, 0.85);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2), 0 0 14px rgba(240, 208, 69, 0.35);
+    }
+
+    .cursor-road::after {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border-radius: 50%;
+      border: 1px solid rgba(240, 208, 69, 0.7);
+    }
+
+    .cursor-studio {
+      display: none;
+      border-radius: 50%;
+      background: radial-gradient(circle at 32% 28%, #ffe0c8 0%, #ff8a55 45%, #c44520 100%);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
 
     body.is-studio .cursor-road { display: none; }
     body.is-studio .cursor-studio { display: block; }
-
-    .cursor-ring {
-      position: fixed;
-      width: 48px;
-      height: 48px;
-      margin: -24px 0 0 -24px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.28);
-      pointer-events: none;
-      z-index: 49;
-      transform: translate3d(-100px, -100px, 0);
-      will-change: transform;
-      transition: opacity 0.25s ease, border-color 0.3s ease;
-    }
-
-    body.is-studio .cursor-ring {
-      opacity: 0;
-    }
-
-    .cursor-road .chainring {
-      transform-origin: 17px 17px;
-      animation: spin-ring 1.1s linear infinite;
-    }
-
-    @keyframes spin-ring {
-      to { transform: rotate(360deg); }
-    }
   </style>
 </head>
 <body>
-  <button class="switcher" type="button" id="theme-switch" aria-label="Switch site">
-    View Studio Lau
-  </button>
+  <button class="switcher" type="button" id="theme-switch">View Studio Lau</button>
 
-  <!-- QUINTA RURAL -->
-  <div class="theme theme-road is-active" data-theme="road">
+  <div class="theme theme-road is-active">
     <header class="hero">
-      <div class="scene" aria-hidden="true">
-        <div class="clouds"></div>
-        <div class="sun"></div>
-
-        <div class="hills hills--far">
-          <svg viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice">
-            <path class="hill-far" d="M0,500 C160,450 280,470 400,430 S620,370 760,400 S1000,350 1180,380 S1320,360 1400,370 L1400,900 L0,900 Z" />
-          </svg>
-        </div>
-
-        <div class="hills hills--mid">
-          <svg viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice">
-            <path class="hill-mid" d="M0,560 C200,510 360,540 520,490 S820,430 980,470 S1220,430 1400,460 L1400,900 L0,900 Z" />
-            <path class="field" d="M0,640 C240,600 420,630 620,590 S980,540 1200,580 S1340,560 1400,570 L1400,900 L0,900 Z" />
-          </svg>
-        </div>
-
-        <div class="hills hills--near">
-          <svg viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice">
-            <path class="hill-near" d="M0,700 C180,650 340,690 520,640 S840,590 1040,630 S1260,600 1400,620 L1400,900 L0,900 Z" />
-            <!-- cork / olive trees -->
-            <ellipse class="tree-cork" cx="160" cy="650" rx="22" ry="48" />
-            <ellipse class="tree-cork" cx="210" cy="660" rx="16" ry="36" />
-            <rect class="tree-trunk" x="154" y="690" width="8" height="28" rx="2" />
-            <ellipse class="tree-canopy" cx="420" cy="655" rx="28" ry="34" />
-            <rect class="tree-trunk" x="416" y="682" width="7" height="30" rx="2" />
-            <ellipse class="tree-cork" cx="980" cy="630" rx="24" ry="52" />
-            <ellipse class="tree-cork" cx="1040" cy="640" rx="18" ry="40" />
-            <ellipse class="tree-canopy" cx="1180" cy="645" rx="30" ry="36" />
-            <rect class="tree-trunk" x="1176" y="674" width="7" height="28" rx="2" />
-            <ellipse class="tree-cork" cx="1280" cy="655" rx="20" ry="44" />
-          </svg>
-        </div>
-
-        <div class="roads">
-          <svg viewBox="0 0 1400 900" preserveAspectRatio="none">
-            <path class="road-path road-path--shoulder" d="M-80,870 C200,790 360,710 520,630 S860,480 1040,430 S1280,370 1520,330" />
-            <path class="road-path road-path--base" d="M-80,870 C200,790 360,710 520,630 S860,480 1040,430 S1280,370 1520,330" />
-            <path class="road-path road-path--lane" d="M-80,870 C200,790 360,710 520,630 S860,480 1040,430 S1280,370 1520,330" />
-          </svg>
-        </div>
-
-        <div class="bike-hero">
-          <!-- sleek road bike silhouette -->
-          <svg viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g stroke="#0f1612" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="140" cy="250" r="78" fill="none" stroke="#111" stroke-width="7"/>
-              <circle cx="140" cy="250" r="68" stroke="#c9ccd0" stroke-width="2"/>
-              <circle cx="500" cy="250" r="78" fill="none" stroke="#111" stroke-width="7"/>
-              <circle cx="500" cy="250" r="68" stroke="#c9ccd0" stroke-width="2"/>
-              <!-- spokes hint -->
-              <g stroke="#8a9098" stroke-width="1.2" opacity="0.7">
-                <line x1="140" y1="250" x2="140" y2="182"/>
-                <line x1="140" y1="250" x2="198" y2="220"/>
-                <line x1="140" y1="250" x2="188" y2="290"/>
-                <line x1="140" y1="250" x2="92" y2="290"/>
-                <line x1="140" y1="250" x2="82" y2="220"/>
-                <line x1="500" y1="250" x2="500" y2="182"/>
-                <line x1="500" y1="250" x2="558" y2="220"/>
-                <line x1="500" y1="250" x2="548" y2="290"/>
-                <line x1="500" y1="250" x2="452" y2="290"/>
-                <line x1="500" y1="250" x2="442" y2="220"/>
-              </g>
-              <!-- frame: deep red carbon vibe -->
-              <path d="M140 250 L290 145 L470 155 L500 250" stroke="#c1121f" stroke-width="6"/>
-              <path d="M290 145 L250 250 L140 250" stroke="#c1121f" stroke-width="5.5"/>
-              <path d="M250 250 L470 155" stroke="#9a0f18" stroke-width="4.5"/>
-              <!-- fork -->
-              <path d="M500 250 L485 120" stroke="#1a1d22" stroke-width="5"/>
-              <!-- bars -->
-              <path d="M485 120 C470 95 445 88 420 92" stroke="#1a1d22" stroke-width="5"/>
-              <path d="M420 92 C405 78 395 95 400 110" stroke="#1a1d22" stroke-width="4"/>
-              <!-- saddle -->
-              <path d="M270 145 L255 118" stroke="#1a1d22" stroke-width="4"/>
-              <path d="M240 112 L285 108" stroke="#1a1d22" stroke-width="6"/>
-              <!-- crank -->
-              <circle cx="250" cy="250" r="16" stroke="#d4d7db" stroke-width="3"/>
-              <line x1="250" y1="250" x2="250" y2="292" stroke="#d4d7db" stroke-width="3"/>
-            </g>
-            <!-- glossy highlight on top tube -->
-            <path d="M300 148 L455 156" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </div>
-      </div>
-      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="scene" aria-hidden="true"></div>
+      <div class="road-line" aria-hidden="true"></div>
       <div class="hero-content">
         <h1 class="brand">Quinta <span>Rural</span></h1>
-        <p class="lead">Where carbon meets cork country. A modern N2 stop for road bikes — espresso, real food, and a bed after the climb.</p>
+        <p class="lead">A quiet stop for road cyclists on Portugal’s N2 — coffee, meals, and a night under the cork oaks.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="#stay">Book a stay</a>
-          <a class="btn btn-secondary" href="#offer">See facilities</a>
+          <a class="btn btn-ghost" href="#offer">Facilities</a>
         </div>
       </div>
     </header>
@@ -699,23 +444,23 @@
     <section class="section section-offer" id="offer">
       <div class="section-inner">
         <h2>Fuel. Fix. Rest.</h2>
-        <p class="support">Built for riders who roll in on sleek machines — hungry, dusty, already eyeing tomorrow’s kilometres.</p>
+        <p class="support">For riders and their bikes — simple hospitality on the open road.</p>
         <ul class="offer-list">
           <li>
             <h3>Café &amp; kitchen</h3>
-            <p>Espresso, cold drinks, and proper plates — from a quick pastry to a full recovery meal.</p>
+            <p>Espresso, cold drinks, and proper food when you need it.</p>
           </li>
           <li>
-            <h3>Bike lounge</h3>
-            <p>Secure storage for road bikes, wash station, tools, pump, and shade to stretch under the trees.</p>
+            <h3>Bike care</h3>
+            <p>Secure storage, wash, pump, and tools in the shade.</p>
           </li>
           <li>
             <h3>Stay over</h3>
-            <p>Clean, modern rooms in the quinta — quiet nights, early breakfast, wheels ready at dawn.</p>
+            <p>Quiet rooms, early breakfast, wheels ready at dawn.</p>
           </li>
           <li>
-            <h3>N2 know-how</h3>
-            <p>Local climbs, smooth stretches, and a send-off back onto Portugal’s great north–south road.</p>
+            <h3>On the N2</h3>
+            <p>Pull off the national road, recover, ride on.</p>
           </li>
         </ul>
       </div>
@@ -723,19 +468,18 @@
 
     <section class="section section-route" id="route">
       <div class="section-inner">
-        <h2>Nature on the N2</h2>
-        <p class="support">Olive shade, open fields, and a winding ribbon of asphalt just outside the gate. Pull off, recover, ride on.</p>
-        <p class="route-note">Sexy road bikes deserve a stop that looks as good as they do — and treats them like guests.</p>
+        <h2>Nature, then asphalt</h2>
+        <p class="support">Hills, light, and a long ribbon of road past the gate.</p>
+        <p class="quote">Built for people who love beautiful bikes — and the landscapes they cross.</p>
       </div>
     </section>
 
     <section class="section section-stay" id="stay">
       <div class="section-inner">
         <h2>Come as you are</h2>
-        <p class="support">Drop in for coffee, stay for dinner, or book a night between stages. Rider-first, bike-first, always.</p>
+        <p class="support">Coffee, dinner, or a night between stages.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="mailto:hello@quintarural.pt">Reserve</a>
-          <a class="btn btn-secondary" href="#offer">Explore more</a>
         </div>
       </div>
     </section>
@@ -743,81 +487,44 @@
     <footer class="footer">Quinta Rural · N2 · Portugal</footer>
   </div>
 
-  <!-- STUDIO LAU -->
-  <div class="theme theme-studio" data-theme="studio">
+  <div class="theme theme-studio">
     <header class="hero">
-      <div class="scene" aria-hidden="true">
-        <div class="bloom bloom--1"></div>
-        <div class="bloom bloom--2"></div>
-        <div class="arcs">
-          <svg viewBox="0 0 1400 900" preserveAspectRatio="none">
-            <path class="arc-line" d="M-40,280 C240,190 480,340 760,250 S1180,150 1520,230" />
-            <path class="arc-line arc-line--bold" d="M-60,520 C260,420 520,600 820,500 S1240,360 1540,450" />
-          </svg>
-        </div>
-        <div class="reformer">
-          <!-- pilates reformer -->
-          <svg viewBox="0 0 640 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- frame rails -->
-            <rect x="40" y="150" width="560" height="18" rx="4" fill="#f4f0e8" stroke="#1a3d42" stroke-width="3"/>
-            <rect x="40" y="200" width="560" height="14" rx="3" fill="#e8e2d6" stroke="#1a3d42" stroke-width="2.5"/>
-            <!-- legs -->
-            <rect x="55" y="214" width="16" height="40" rx="2" fill="#243f44"/>
-            <rect x="560" y="214" width="16" height="40" rx="2" fill="#243f44"/>
-            <rect x="55" y="120" width="16" height="30" rx="2" fill="#243f44"/>
-            <!-- carriage -->
-            <rect x="210" y="128" width="200" height="36" rx="6" fill="#fffaf2" stroke="#1a3d42" stroke-width="3"/>
-            <rect x="220" y="136" width="180" height="10" rx="3" fill="#ffd27a" opacity="0.85"/>
-            <!-- shoulder rests -->
-            <rect x="360" y="112" width="14" height="28" rx="4" fill="#ff7a45"/>
-            <rect x="385" y="112" width="14" height="28" rx="4" fill="#ff7a45"/>
-            <!-- headrest -->
-            <rect x="405" y="138" width="36" height="16" rx="4" fill="#dfe8e6" stroke="#1a3d42" stroke-width="2"/>
-            <!-- footbar -->
-            <rect x="70" y="118" width="70" height="12" rx="6" fill="#1a3d42"/>
-            <circle cx="80" cy="124" r="8" fill="#ff7a45"/>
-            <circle cx="130" cy="124" r="8" fill="#ff7a45"/>
-            <!-- springs -->
-            <path d="M90 168 C110 158 120 178 140 168 S170 158 190 168 S210 178 230 168" stroke="#ffd27a" stroke-width="3" fill="none"/>
-            <path d="M90 178 C110 168 120 188 140 178 S170 168 190 178 S210 188 230 178" stroke="#ffb070" stroke-width="2.5" fill="none"/>
-            <!-- ropes / pulleys -->
-            <circle cx="560" cy="140" r="12" fill="#fffaf2" stroke="#1a3d42" stroke-width="3"/>
-            <path d="M560 140 L520 100 L480 110" stroke="#fffaf2" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="480" cy="110" r="7" fill="#ff7a45"/>
-          </svg>
-        </div>
+      <div class="scene" aria-hidden="true"></div>
+      <div class="reformer" aria-hidden="true">
+        <div class="rail"></div>
+        <div class="rail"></div>
+        <div class="carriage"></div>
       </div>
-      <div class="hero-shade" aria-hidden="true"></div>
       <div class="hero-content">
         <h1 class="brand">Studio <em>Lau</em></h1>
-        <p class="lead">Modern boutique pilates in Santo Estêvão — reformer-led, athletic, and made for an active life.</p>
+        <p class="lead">Boutique pilates in Santo Estêvão — reformer sessions with an athletic edge.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="#book">Book a class</a>
-          <a class="btn btn-secondary" href="#method">Our method</a>
+          <a class="btn btn-ghost" href="#method">Method</a>
         </div>
       </div>
     </header>
 
     <section class="section section-method" id="method">
       <div class="section-inner">
-        <h2>Move with power</h2>
-        <p class="support">Athletic pilates for people who train hard and recover smarter — control, mobility, and lasting strength.</p>
+        <h2>Strong &amp; precise</h2>
+        <p class="support">Small groups, sharp coaching, reformer-led training.</p>
         <ul class="offer-list">
           <li>
-            <h3>Reformer first</h3>
-            <p>Carriage work with sharp coaching — springs, straps, and room to progress at your pace.</p>
+            <h3>Reformer classes</h3>
+            <p>Carriage work for strength, control, and mobility.</p>
           </li>
           <li>
             <h3>Athletic focus</h3>
-            <p>Built for riders, runners, and anyone who wants a body that performs outdoors.</p>
+            <p>For people who move hard outside the studio too.</p>
           </li>
           <li>
-            <h3>Boutique space</h3>
-            <p>A calm, light-filled studio — modern design, premium reformers, no crowds.</p>
+            <h3>Boutique room</h3>
+            <p>Light, calm, premium equipment — no crowds.</p>
           </li>
           <li>
-            <h3>Active escape</h3>
-            <p>Train while you’re away, or make Santo Estêvão your weekly reset destination.</p>
+            <h3>Santo Estêvão</h3>
+            <p>A quiet base with destination energy.</p>
           </li>
         </ul>
       </div>
@@ -826,51 +533,28 @@
     <section class="section section-place" id="place">
       <div class="section-inner">
         <h2>Santo Estêvão</h2>
-        <p class="support">A quiet Portuguese village base with resort energy — sunshine, space, and sessions that stay with you.</p>
-        <p class="place-line">Come for the workout. Leave taller, lighter, ready for whatever’s next.</p>
+        <p class="support">Sunshine, space, and sessions that stay with you.</p>
+        <p class="quote">Come for the workout. Leave ready for whatever’s next.</p>
       </div>
     </section>
 
     <section class="section section-book" id="book">
       <div class="section-inner" style="text-align:center">
-        <h2>Your next session</h2>
-        <p class="support" style="margin-left:auto;margin-right:auto">Morning flow or evening burn — book a spot and step onto the reformer.</p>
-        <div class="cta-row">
+        <h2>Book a session</h2>
+        <p class="support" style="margin-inline:auto">Morning or evening — step onto the reformer.</p>
+        <div class="cta-row" style="justify-content:center">
           <a class="btn btn-primary" href="mailto:hello@studiolau.pt">Book now</a>
-          <a class="btn btn-secondary" href="#method">See classes</a>
         </div>
       </div>
     </section>
 
-    <footer class="footer">Studio Lau · Boutique Pilates · Santo Estêvão</footer>
+    <footer class="footer">Studio Lau · Santo Estêvão</footer>
   </div>
 
   <div class="cursor" aria-hidden="true">
-    <!-- surprise: spinning chainring / cassette -->
-    <svg class="cursor-road" viewBox="0 0 34 34">
-      <circle cx="17" cy="17" r="15" fill="#1a1d22" stroke="#f0d045" stroke-width="1.5"/>
-      <g class="chainring" fill="none" stroke="#f0d045" stroke-width="1.2">
-        <circle cx="17" cy="17" r="11"/>
-        <circle cx="17" cy="17" r="6"/>
-        <path d="M17 6 L17 11 M17 23 L17 28 M6 17 L11 17 M23 17 L28 17 M9.5 9.5 L12.5 12.5 M21.5 21.5 L24.5 24.5 M24.5 9.5 L21.5 12.5 M12.5 21.5 L9.5 24.5"/>
-      </g>
-      <circle cx="17" cy="17" r="2.2" fill="#c1121f"/>
-    </svg>
-    <!-- small swiss ball -->
-    <svg class="cursor-studio" viewBox="0 0 34 34">
-      <defs>
-        <radialGradient id="ball" cx="35%" cy="30%" r="70%">
-          <stop offset="0%" stop-color="#ffe0c8"/>
-          <stop offset="45%" stop-color="#ff7a45"/>
-          <stop offset="100%" stop-color="#c44520"/>
-        </radialGradient>
-      </defs>
-      <circle cx="17" cy="17" r="14" fill="url(#ball)" stroke="rgba(255,255,255,0.35)" stroke-width="1"/>
-      <ellipse cx="12" cy="11" rx="5" ry="3.2" fill="rgba(255,255,255,0.45)"/>
-      <path d="M6 20 C12 24 22 24 28 19" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" fill="none"/>
-    </svg>
+    <div class="cursor-road"></div>
+    <div class="cursor-studio"></div>
   </div>
-  <div class="cursor-ring" aria-hidden="true"></div>
 
   <script>
     (() => {
@@ -880,19 +564,10 @@
       const studio = document.querySelector(".theme-studio");
       const switcher = document.getElementById("theme-switch");
       const cursor = document.querySelector(".cursor");
-      const ring = document.querySelector(".cursor-ring");
 
-      let targetX = 0.5;
-      let targetY = 0.5;
-      let currentX = 0.5;
-      let currentY = 0.5;
-      let mousePx = -100;
-      let mousePy = -100;
-      let ringX = -100;
-      let ringY = -100;
-      let prevPx = mousePx;
+      let targetX = 0.5, targetY = 0.5, currentX = 0.5, currentY = 0.5;
+      let mousePx = -100, mousePy = -100;
       let studioMode = false;
-
       const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       function setStudio(on) {
@@ -918,27 +593,14 @@
       }, { passive: true });
 
       function frame() {
-        const ease = prefersReduced ? 1 : 0.075;
+        const ease = prefersReduced ? 1 : 0.08;
         currentX += (targetX - currentX) * ease;
         currentY += (targetY - currentY) * ease;
-        ringX += (mousePx - ringX) * (prefersReduced ? 1 : 0.12);
-        ringY += (mousePy - ringY) * (prefersReduced ? 1 : 0.12);
-
-        const px = (currentX - 0.5) * 2;
-        const py = (currentY - 0.5) * 2;
-        const vx = mousePx - prevPx;
-        prevPx = mousePx;
-
         root.style.setProperty("--mx", `${(currentX * 100).toFixed(2)}%`);
         root.style.setProperty("--my", `${(currentY * 100).toFixed(2)}%`);
-        root.style.setProperty("--px", px.toFixed(3));
-        root.style.setProperty("--py", py.toFixed(3));
-        root.style.setProperty("--vx", Math.max(-1, Math.min(1, vx / 40)).toFixed(3));
-
-        const lean = studioMode ? 0 : Number(getComputedStyle(root).getPropertyValue("--vx")) * 18;
-        cursor.style.transform = `translate3d(${mousePx}px, ${mousePy}px, 0) rotate(${lean}deg)`;
-        ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
-
+        root.style.setProperty("--px", ((currentX - 0.5) * 2).toFixed(3));
+        root.style.setProperty("--py", ((currentY - 0.5) * 2).toFixed(3));
+        cursor.style.transform = `translate3d(${mousePx}px, ${mousePy}px, 0)`;
         requestAnimationFrame(frame);
       }
 
