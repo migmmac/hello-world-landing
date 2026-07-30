@@ -3,19 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hello Laura</title>
+  <title>Allez Migui</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: #0a0e1a;
-      --court: #1a3d2e;
-      --electric: #00d4ff;
-      --lilac: #b794f6;
-      --lime: #c8f542;
-      --hot: #ff3366;
-      --white: #f4f6fb;
+      --asphalt: #0c0f14;
+      --asphalt-mid: #151a22;
+      --chalk: #f2f4f7;
+      --lane: #f5d547;
+      --flare: #ff4d2e;
+      --sky: #3dd6c6;
+      --mx: 50%;
+      --my: 50%;
+      --px: 0;
+      --py: 0;
     }
 
     * {
@@ -24,49 +27,142 @@
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
+    html, body {
+      height: 100%;
     }
 
     body {
-      min-height: 100vh;
-      font-family: "Syne", system-ui, sans-serif;
-      color: var(--white);
-      background: var(--ink);
-      overflow-x: hidden;
+      font-family: "Outfit", system-ui, sans-serif;
+      color: var(--chalk);
+      background: var(--asphalt);
+      overflow: hidden;
+      cursor: none;
     }
 
-    .bg {
+    @media (hover: none) {
+      body { cursor: auto; }
+      .cursor, .cursor-ring { display: none; }
+    }
+
+    .scene {
       position: fixed;
       inset: 0;
-      z-index: 0;
+      overflow: hidden;
       background:
-        radial-gradient(ellipse 80% 60% at 10% 20%, rgba(183, 148, 246, 0.35) 0%, transparent 55%),
-        radial-gradient(ellipse 70% 50% at 90% 80%, rgba(0, 212, 255, 0.25) 0%, transparent 50%),
-        radial-gradient(ellipse 60% 40% at 50% 100%, rgba(200, 245, 66, 0.12) 0%, transparent 45%),
-        linear-gradient(165deg, #0a0e1a 0%, #121a2e 40%, #0f1628 100%);
+        radial-gradient(
+          900px circle at var(--mx) var(--my),
+          rgba(61, 214, 198, 0.16) 0%,
+          transparent 42%
+        ),
+        radial-gradient(
+          620px circle at calc(100% - var(--mx)) calc(100% - var(--my)),
+          rgba(255, 77, 46, 0.12) 0%,
+          transparent 45%
+        ),
+        linear-gradient(160deg, #0c0f14 0%, #121820 48%, #0a0d12 100%);
+      transition: background 0.05s linear;
     }
 
-    .court-lines {
-      position: fixed;
-      inset: -20%;
-      z-index: 0;
-      opacity: 0.14;
-      background-image:
-        linear-gradient(90deg, transparent 49.5%, var(--electric) 49.5%, var(--electric) 50.5%, transparent 50.5%),
-        linear-gradient(0deg, transparent 49.5%, var(--electric) 49.5%, var(--electric) 50.5%, transparent 50.5%);
-      background-size: 120px 120px;
-      transform: rotate(-8deg) scale(1.2);
+    .roads {
+      position: absolute;
+      inset: -12%;
+      width: 124%;
+      height: 124%;
+      transform: translate3d(calc(var(--px) * -28px), calc(var(--py) * -18px), 0);
+      will-change: transform;
       pointer-events: none;
+    }
+
+    .roads svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .road-path {
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .road-path--base {
+      stroke: rgba(255, 255, 255, 0.06);
+      stroke-width: 48;
+    }
+
+    .road-path--lane {
+      stroke: var(--lane);
+      stroke-width: 2.5;
+      stroke-dasharray: 18 22;
+      animation: dash-flow 1.8s linear infinite;
+    }
+
+    .road-path--ghost {
+      stroke: rgba(61, 214, 198, 0.22);
+      stroke-width: 1.5;
+      stroke-dasharray: 6 14;
+      animation: dash-flow 3.2s linear infinite reverse;
+    }
+
+    @keyframes dash-flow {
+      to { stroke-dashoffset: -80; }
+    }
+
+    .roads--far {
+      opacity: 0.55;
+      transform: translate3d(calc(var(--px) * -12px), calc(var(--py) * -8px), 0) scale(1.05);
+    }
+
+    .roads--near {
+      opacity: 1;
+      transform: translate3d(calc(var(--px) * -42px), calc(var(--py) * -26px), 0);
+    }
+
+    .wheel {
+      position: absolute;
+      width: min(42vw, 420px);
+      height: min(42vw, 420px);
+      right: 6%;
+      bottom: 8%;
+      border-radius: 50%;
+      border: 1px solid rgba(242, 244, 247, 0.12);
+      transform: translate3d(calc(var(--px) * 30px), calc(var(--py) * 20px), 0)
+                 rotate(calc(var(--px) * 18deg + var(--py) * 8deg));
+      will-change: transform;
+      pointer-events: none;
+    }
+
+    .wheel::before,
+    .wheel::after {
+      content: "";
+      position: absolute;
+      inset: 12%;
+      border-radius: 50%;
+      border: 1px solid rgba(245, 213, 71, 0.28);
+    }
+
+    .wheel::after {
+      inset: 28%;
+      border-color: rgba(61, 214, 198, 0.35);
+    }
+
+    .spoke {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 1px;
+      height: 50%;
+      background: linear-gradient(to top, transparent, rgba(242, 244, 247, 0.25));
+      transform-origin: top center;
     }
 
     .grain {
-      position: fixed;
+      position: absolute;
       inset: 0;
-      z-index: 1;
-      opacity: 0.04;
+      opacity: 0.05;
       pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
     main {
@@ -75,142 +171,175 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
-      padding: 2rem 1.5rem 3rem;
-      text-align: center;
+      padding: clamp(1.5rem, 6vw, 5rem);
+      max-width: 1100px;
+      transform: translate3d(calc(var(--px) * 10px), calc(var(--py) * 6px), 0);
+      will-change: transform;
     }
 
     .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--ink);
-      background: linear-gradient(90deg, var(--lime), var(--electric));
-      padding: 0.55rem 1rem;
-      border-radius: 999px;
-      margin-bottom: 2rem;
-      box-shadow: 0 0 40px rgba(0, 212, 255, 0.35);
-      animation: pulse-glow 3s ease-in-out infinite;
-    }
-
-    @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 30px rgba(0, 212, 255, 0.25); }
-      50% { box-shadow: 0 0 50px rgba(183, 148, 246, 0.45); }
+      color: var(--asphalt);
+      background: var(--lane);
+      padding: 0.5rem 0.9rem;
+      margin-bottom: 1.6rem;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 100%, 10px 100%);
     }
 
     h1 {
-      font-size: clamp(3rem, 12vw, 6.5rem);
-      font-weight: 800;
-      line-height: 0.95;
-      letter-spacing: -0.04em;
-      margin-bottom: 1.25rem;
-      background: linear-gradient(
-        120deg,
-        var(--white) 0%,
-        var(--electric) 35%,
-        var(--lilac) 70%,
-        var(--white) 100%
-      );
-      background-size: 200% auto;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(4.2rem, 16vw, 9.5rem);
+      line-height: 0.88;
+      letter-spacing: 0.02em;
+      font-weight: 400;
+      margin-bottom: 1.1rem;
+      text-shadow: 0 0 60px rgba(61, 214, 198, 0.2);
+    }
+
+    h1 span {
+      display: block;
+      background: linear-gradient(95deg, var(--chalk) 0%, var(--sky) 55%, var(--lane) 100%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      animation: shimmer 8s linear infinite;
-    }
-
-    @keyframes shimmer {
-      to { background-position: 200% center; }
     }
 
     .subtitle {
-      font-family: "JetBrains Mono", monospace;
-      font-size: clamp(0.75rem, 2.5vw, 0.95rem);
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(244, 246, 251, 0.65);
-      max-width: 28ch;
-      line-height: 1.6;
+      max-width: 28rem;
+      font-size: clamp(1rem, 2.4vw, 1.2rem);
+      font-weight: 400;
+      line-height: 1.55;
+      color: rgba(242, 244, 247, 0.68);
     }
 
-    .subtitle em {
-      font-style: normal;
-      color: var(--lilac);
+    .subtitle strong {
+      color: var(--flare);
+      font-weight: 600;
     }
 
-    .accent-bar {
-      margin-top: 3rem;
-      display: flex;
-      gap: 0.35rem;
-      align-items: flex-end;
-      height: 48px;
-    }
-
-    .accent-bar span {
-      width: 4px;
-      border-radius: 2px;
-      background: var(--electric);
-      animation: bounce 1.2s ease-in-out infinite;
-    }
-
-    .accent-bar span:nth-child(1) { height: 40%; animation-delay: 0s; background: var(--lilac); }
-    .accent-bar span:nth-child(2) { height: 70%; animation-delay: 0.1s; }
-    .accent-bar span:nth-child(3) { height: 100%; animation-delay: 0.2s; background: var(--lime); }
-    .accent-bar span:nth-child(4) { height: 55%; animation-delay: 0.15s; background: var(--hot); }
-    .accent-bar span:nth-child(5) { height: 85%; animation-delay: 0.05s; }
-
-    @keyframes bounce {
-      0%, 100% { transform: scaleY(1); opacity: 0.85; }
-      50% { transform: scaleY(0.65); opacity: 1; }
-    }
-
-    .orb {
+    .cursor {
       position: fixed;
+      width: 10px;
+      height: 10px;
+      margin: -5px 0 0 -5px;
       border-radius: 50%;
-      filter: blur(80px);
+      background: var(--lane);
+      box-shadow: 0 0 18px rgba(245, 213, 71, 0.7);
       pointer-events: none;
-      z-index: 0;
+      z-index: 20;
+      transform: translate3d(-100px, -100px, 0);
+      will-change: transform;
     }
 
-    .orb--1 {
-      width: 320px;
-      height: 320px;
-      background: var(--lilac);
-      top: -80px;
-      right: -60px;
-      opacity: 0.35;
-    }
-
-    .orb--2 {
-      width: 280px;
-      height: 280px;
-      background: var(--electric);
-      bottom: -100px;
-      left: -80px;
-      opacity: 0.28;
+    .cursor-ring {
+      position: fixed;
+      width: 44px;
+      height: 44px;
+      margin: -22px 0 0 -22px;
+      border-radius: 50%;
+      border: 1px solid rgba(242, 244, 247, 0.35);
+      pointer-events: none;
+      z-index: 19;
+      transform: translate3d(-100px, -100px, 0);
+      will-change: transform;
+      transition: border-color 0.2s ease;
     }
   </style>
 </head>
 <body>
-  <div class="bg" aria-hidden="true"></div>
-  <div class="court-lines" aria-hidden="true"></div>
-  <div class="grain" aria-hidden="true"></div>
-  <div class="orb orb--1" aria-hidden="true"></div>
-  <div class="orb orb--2" aria-hidden="true"></div>
+  <div class="scene" aria-hidden="true">
+    <div class="roads roads--far">
+      <svg viewBox="0 0 1400 900" preserveAspectRatio="none">
+        <path class="road-path road-path--ghost" d="M-80,720 C220,640 380,500 560,420 S920,280 1180,220 S1480,120 1520,80" />
+        <path class="road-path road-path--ghost" d="M-40,180 C240,260 420,340 640,470 S1040,700 1480,820" />
+      </svg>
+    </div>
+
+    <div class="roads roads--near">
+      <svg viewBox="0 0 1400 900" preserveAspectRatio="none">
+        <path class="road-path road-path--base" d="M-100,780 C180,700 340,560 520,460 S880,300 1120,250 S1460,180 1540,140" />
+        <path class="road-path road-path--lane" d="M-100,780 C180,700 340,560 520,460 S880,300 1120,250 S1460,180 1540,140" />
+        <path class="road-path road-path--base" d="M-60,120 C260,220 460,320 680,470 S1080,760 1520,880" />
+        <path class="road-path road-path--lane" d="M-60,120 C260,220 460,320 680,470 S1080,760 1520,880" />
+      </svg>
+    </div>
+
+    <div class="wheel">
+      <span class="spoke" style="transform: rotate(0deg) translateX(-0.5px)"></span>
+      <span class="spoke" style="transform: rotate(30deg) translateX(-0.5px)"></span>
+      <span class="spoke" style="transform: rotate(60deg) translateX(-0.5px)"></span>
+      <span class="spoke" style="transform: rotate(90deg) translateX(-0.5px)"></span>
+      <span class="spoke" style="transform: rotate(120deg) translateX(-0.5px)"></span>
+      <span class="spoke" style="transform: rotate(150deg) translateX(-0.5px)"></span>
+    </div>
+
+    <div class="grain"></div>
+  </div>
 
   <main>
-    <p class="badge">Masters 1000 · Canada</p>
-    <h1>Hello Laura</h1>
-    <p class="subtitle">Welcome to the <em>playground</em> — summer energy, centre-court bold.</p>
-    <div class="accent-bar" aria-hidden="true">
-      <span></span><span></span><span></span><span></span><span></span>
-    </div>
+    <p class="badge">Road · Pace · Flow</p>
+    <h1><span>Allez Migui</span></h1>
+    <p class="subtitle">
+      Smooth asphalt, open road, clean lines.
+      Keep the cadence — <strong>allez</strong>.
+    </p>
   </main>
+
+  <div class="cursor" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const cursor = document.querySelector(".cursor");
+      const ring = document.querySelector(".cursor-ring");
+
+      let targetX = 0.5;
+      let targetY = 0.5;
+      let currentX = 0.5;
+      let currentY = 0.5;
+      let mousePx = -100;
+      let mousePy = -100;
+      let ringX = -100;
+      let ringY = -100;
+
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      window.addEventListener("pointermove", (e) => {
+        targetX = e.clientX / window.innerWidth;
+        targetY = e.clientY / window.innerHeight;
+        mousePx = e.clientX;
+        mousePy = e.clientY;
+      }, { passive: true });
+
+      function frame() {
+        const ease = prefersReduced ? 1 : 0.08;
+        currentX += (targetX - currentX) * ease;
+        currentY += (targetY - currentY) * ease;
+        ringX += (mousePx - ringX) * (prefersReduced ? 1 : 0.14);
+        ringY += (mousePy - ringY) * (prefersReduced ? 1 : 0.14);
+
+        const px = (currentX - 0.5) * 2;
+        const py = (currentY - 0.5) * 2;
+
+        root.style.setProperty("--mx", `${(currentX * 100).toFixed(2)}%`);
+        root.style.setProperty("--my", `${(currentY * 100).toFixed(2)}%`);
+        root.style.setProperty("--px", px.toFixed(3));
+        root.style.setProperty("--py", py.toFixed(3));
+
+        cursor.style.transform = `translate3d(${mousePx}px, ${mousePy}px, 0)`;
+        ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+
+        requestAnimationFrame(frame);
+      }
+
+      requestAnimationFrame(frame);
+    })();
+  </script>
 </body>
 </html>
