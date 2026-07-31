@@ -13,6 +13,7 @@
       --my: 50%;
       --px: 0;
       --py: 0;
+      --scroll: 0;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,7 +22,7 @@
 
     body {
       font-family: "Outfit", system-ui, sans-serif;
-      background: #1c2418;
+      background: #1a1410;
       color: #f2efe8;
     }
 
@@ -41,7 +42,7 @@
       text-transform: uppercase;
       padding: 0.65rem 0.95rem;
       border: 1px solid rgba(255, 255, 255, 0.28);
-      background: rgba(0, 0, 0, 0.25);
+      background: rgba(0, 0, 0, 0.28);
       backdrop-filter: blur(12px);
       color: #fff;
     }
@@ -50,45 +51,86 @@
       background: rgba(255, 255, 255, 0.12);
     }
 
-    /* ——— QUINTA ——— */
-    .theme-road .hero {
-      position: relative;
-      min-height: 100vh;
-      min-height: 100dvh;
-      display: grid;
-      align-items: end;
+    /* Shared photo background — pans & opens as you scroll */
+    .bg-photo {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
       overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
     }
 
-    .theme-road .scene {
+    .theme.is-active .bg-photo {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .bg-photo .frame {
       position: absolute;
-      inset: -3%;
-      background:
-        #2a1e12 url("assets/quinta-rural-hero.png") center / cover no-repeat;
-      transform: translate3d(calc(var(--px) * -12px), calc(var(--py) * -8px), 0) scale(1.06);
+      inset: -8%;
+      background-color: #1a1410;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      transform:
+        translate3d(
+          calc(var(--px) * -14px + var(--scroll) * -4%),
+          calc(var(--py) * -10px + var(--scroll) * 6%),
+          0
+        )
+        scale(calc(1.22 - var(--scroll) * 0.16));
       will-change: transform;
-      transition: none;
     }
 
-    .theme-road .scene::after {
-      content: "";
+    .bg-photo .veil {
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 55% 45% at var(--mx) var(--my), rgba(255, 170, 80, 0.12), transparent 60%),
-        linear-gradient(180deg,
-          rgba(20, 12, 6, 0.15) 0%,
-          rgba(20, 12, 6, 0.05) 40%,
-          rgba(18, 10, 6, 0.45) 70%,
-          rgba(12, 8, 5, 0.82) 100%
+        radial-gradient(ellipse 55% 45% at var(--mx) var(--my), rgba(255, 170, 80, 0.1), transparent 60%),
+        linear-gradient(
+          180deg,
+          rgba(12, 8, 5, calc(0.12 + var(--scroll) * 0.08)) 0%,
+          rgba(12, 8, 5, calc(0.05 + var(--scroll) * 0.12)) 35%,
+          rgba(12, 8, 5, calc(0.28 + var(--scroll) * 0.2)) 100%
         );
       pointer-events: none;
     }
 
-    .theme-road .hero-content {
+    .theme-studio .bg-photo .veil {
+      background:
+        radial-gradient(ellipse 50% 40% at var(--mx) var(--my), rgba(255, 180, 100, 0.08), transparent 55%),
+        linear-gradient(
+          180deg,
+          rgba(14, 20, 18, calc(0.1 + var(--scroll) * 0.08)) 0%,
+          rgba(14, 20, 18, calc(0.06 + var(--scroll) * 0.1)) 40%,
+          rgba(14, 20, 18, calc(0.3 + var(--scroll) * 0.22)) 100%
+        );
+    }
+
+    .theme-road .bg-photo .frame {
+      background-image: url("assets/refugio-ciclista-hero.png");
+    }
+
+    .theme-studio .bg-photo .frame {
+      background-image: url("assets/studio-lau-hero.png");
+    }
+
+    .page {
       position: relative;
-      z-index: 2;
+      z-index: 1;
+    }
+
+    .hero {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: grid;
+      align-items: end;
       padding: clamp(2rem, 6vw, 5rem);
+    }
+
+    .hero-content {
       max-width: 40rem;
       transform: translate3d(calc(var(--px) * 5px), calc(var(--py) * 3px), 0);
     }
@@ -99,20 +141,18 @@
       line-height: 0.9;
       letter-spacing: 0.04em;
       margin-bottom: 1rem;
-      text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+      text-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
     }
 
-    .theme-road .brand span {
-      color: #f0d045;
-    }
+    .theme-road .brand span { color: #f0d045; }
 
-    .theme-road .lead {
+    .lead {
       font-size: clamp(1.05rem, 2vw, 1.2rem);
       line-height: 1.55;
-      color: rgba(255, 245, 230, 0.92);
+      color: rgba(255, 245, 230, 0.94);
       margin-bottom: 1.75rem;
-      max-width: 28rem;
-      text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35);
+      max-width: 30rem;
+      text-shadow: 0 1px 14px rgba(0, 0, 0, 0.4);
     }
 
     .cta-row { display: flex; flex-wrap: wrap; gap: 0.7rem; }
@@ -127,21 +167,31 @@
       padding: 0.9rem 1.25rem;
       border: 1px solid transparent;
       transition: transform 0.2s ease, background 0.2s ease;
+      backdrop-filter: blur(8px);
     }
 
     .btn:hover { transform: translateY(-1px); }
 
     .theme-road .btn-primary { background: #f0d045; color: #1a2418; }
     .theme-road .btn-ghost {
-      border-color: rgba(242, 239, 232, 0.4);
+      border-color: rgba(242, 239, 232, 0.45);
       color: #f2efe8;
+      background: rgba(0, 0, 0, 0.18);
     }
 
     .section {
-      padding: clamp(3.5rem, 8vw, 6.5rem) clamp(1.5rem, 5vw, 4rem);
+      padding: clamp(3.2rem, 7vw, 5.5rem) clamp(1.5rem, 5vw, 4rem);
     }
 
-    .section-inner { width: min(980px, 100%); margin: 0 auto; }
+    .section-inner {
+      width: min(980px, 100%);
+      margin: 0 auto;
+      padding: clamp(1.6rem, 4vw, 2.4rem);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(16, 12, 8, 0.42);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
 
     .section h2 {
       font-family: "Bebas Neue", sans-serif;
@@ -154,8 +204,8 @@
       font-size: 1.02rem;
       line-height: 1.55;
       max-width: 32rem;
-      opacity: 0.72;
-      margin-bottom: 2.25rem;
+      opacity: 0.82;
+      margin-bottom: 2rem;
     }
 
     .offer-list {
@@ -174,76 +224,32 @@
     .offer-list p {
       font-size: 0.92rem;
       line-height: 1.5;
-      opacity: 0.65;
+      opacity: 0.72;
     }
 
-    .theme-road .section-offer { background: #151c13; }
-    .theme-road .section-route { background: #1a2417; }
-    .theme-road .section-stay { background: #10160f; }
-
-    .theme-road .quote {
+    .quote {
       font-family: "Cormorant Garamond", Georgia, serif;
       font-style: italic;
       font-size: clamp(1.4rem, 3vw, 1.9rem);
       line-height: 1.35;
-      color: #f0d045;
-      max-width: 28rem;
+      max-width: 30rem;
     }
 
-    .theme-road .footer {
-      padding: 1.75rem clamp(1.5rem, 5vw, 4rem);
-      background: #0c110b;
+    .theme-road .quote { color: #f0d045; }
+
+    .footer {
+      position: relative;
+      z-index: 1;
+      padding: 1.75rem clamp(1.5rem, 5vw, 4rem) 2.5rem;
       font-size: 0.72rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      opacity: 0.45;
+      color: rgba(255, 245, 230, 0.55);
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
     }
 
-    /* ——— STUDIO LAU ——— */
-    .theme-studio { background: #2a3530; color: #faf7f1; }
-
-    .theme-studio .hero {
-      position: relative;
-      min-height: 100vh;
-      min-height: 100dvh;
-      display: grid;
-      align-items: end;
-      justify-items: start;
-      text-align: left;
-      overflow: hidden;
-    }
-
-    .theme-studio .scene {
-      position: absolute;
-      inset: -3%;
-      background:
-        #2a3530 url("assets/studio-lau-hero.png") center / cover no-repeat;
-      transform: translate3d(calc(var(--px) * -12px), calc(var(--py) * -8px), 0) scale(1.06);
-      will-change: transform;
-    }
-
-    .theme-studio .scene::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 50% 40% at var(--mx) var(--my), rgba(255, 180, 100, 0.1), transparent 55%),
-        linear-gradient(180deg,
-          rgba(20, 28, 24, 0.12) 0%,
-          rgba(20, 28, 24, 0.08) 42%,
-          rgba(18, 24, 22, 0.48) 72%,
-          rgba(14, 18, 16, 0.82) 100%
-        );
-      pointer-events: none;
-    }
-
-    .theme-studio .hero-content {
-      position: relative;
-      z-index: 2;
-      padding: clamp(2rem, 6vw, 5rem);
-      max-width: 38rem;
-      transform: translate3d(calc(var(--px) * 5px), calc(var(--py) * 3px), 0);
-    }
+    /* Studio */
+    .theme-studio { color: #faf7f1; }
 
     .theme-studio .brand {
       font-size: clamp(4rem, 12vw, 7.2rem);
@@ -251,7 +257,7 @@
       letter-spacing: -0.03em;
       line-height: 0.95;
       margin-bottom: 1rem;
-      text-shadow: 0 2px 24px rgba(0, 0, 0, 0.3);
+      text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
     }
 
     .theme-studio .brand em {
@@ -261,25 +267,17 @@
       color: #ffd27a;
     }
 
-    .theme-studio .lead {
-      font-size: clamp(1.05rem, 2.1vw, 1.2rem);
-      line-height: 1.55;
-      color: rgba(250, 247, 241, 0.92);
-      margin: 0 0 1.75rem;
-      max-width: 28rem;
-      text-shadow: 0 1px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    .theme-studio .cta-row { justify-content: flex-start; }
     .theme-studio .btn-primary { background: #faf7f1; color: #2f4a42; }
     .theme-studio .btn-ghost {
       border-color: rgba(250, 247, 241, 0.5);
       color: #faf7f1;
+      background: rgba(0, 0, 0, 0.16);
     }
 
-    .theme-studio .section-method { background: #243530; }
-    .theme-studio .section-place { background: #1e2e2a; }
-    .theme-studio .section-book { background: #182622; }
+    .theme-studio .section-inner {
+      background: rgba(18, 28, 24, 0.4);
+      border-color: rgba(255, 255, 255, 0.14);
+    }
 
     .theme-studio .section h2 {
       font-family: "Outfit", system-ui, sans-serif;
@@ -287,23 +285,12 @@
       letter-spacing: -0.02em;
     }
 
-    .theme-studio .quote {
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-style: italic;
-      font-size: clamp(1.4rem, 3vw, 1.9rem);
-      line-height: 1.35;
-      color: #ffd27a;
-      max-width: 28rem;
-    }
+    .theme-studio .quote { color: #ffd27a; }
 
-    .theme-studio .footer {
-      padding: 1.75rem clamp(1.5rem, 5vw, 4rem);
-      background: #121c19;
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      opacity: 0.45;
-      text-align: left;
+    @media (prefers-reduced-motion: reduce) {
+      .bg-photo .frame {
+        transform: scale(1.08);
+      }
     }
   </style>
 </head>
@@ -311,121 +298,133 @@
   <button class="switcher" type="button" id="theme-switch">View Studio Lau</button>
 
   <div class="theme theme-road is-active">
-    <header class="hero">
-      <div class="scene" role="img" aria-label="Traditional Alentejo house at sunset behind a stone fence and open iron gate, with a road bike leaning beside it"></div>
-      <div class="hero-content">
-        <h1 class="brand">Refúgio <span>do Ciclista</span></h1>
-        <p class="lead">The gate is open. Kickstand down. Shower, then supper — a rider’s stop on Portugal’s N2, at the hour the light goes gold.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="#stay">Book a stay</a>
-          <a class="btn btn-ghost" href="#offer">Facilities</a>
+    <div class="bg-photo" aria-hidden="true">
+      <div class="frame"></div>
+      <div class="veil"></div>
+    </div>
+
+    <div class="page">
+      <header class="hero">
+        <div class="hero-content">
+          <h1 class="brand">Refúgio <span>do Ciclista</span></h1>
+          <p class="lead">A well-earned stop on Portugal’s N2 — pull off, breathe, eat, maybe stay. The road is still there when you’re ready.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#stay">Book a stay</a>
+            <a class="btn btn-ghost" href="#offer">Facilities</a>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
 
-    <section class="section section-offer" id="offer">
-      <div class="section-inner">
-        <h2>Fuel. Fix. Rest.</h2>
-        <p class="support">For riders and their bikes — simple hospitality on the open road.</p>
-        <ul class="offer-list">
-          <li>
-            <h3>Café &amp; kitchen</h3>
-            <p>Espresso, cold drinks, and proper food when you need it.</p>
-          </li>
-          <li>
-            <h3>Bike care</h3>
-            <p>Secure storage, wash, pump, and tools in the shade.</p>
-          </li>
-          <li>
-            <h3>Stay over</h3>
-            <p>Quiet rooms, early breakfast, wheels ready at dawn.</p>
-          </li>
-          <li>
-            <h3>On the N2</h3>
-            <p>Pull off the national road, recover, ride on.</p>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section section-route" id="route">
-      <div class="section-inner">
-        <h2>Nature, then asphalt</h2>
-        <p class="support">Hills, light, and a long ribbon of road past the gate.</p>
-        <p class="quote">Arrive dusty. Leave fed, clean, and already thinking about tomorrow’s kilometres.</p>
-      </div>
-    </section>
-
-    <section class="section section-stay" id="stay">
-      <div class="section-inner">
-        <h2>Come as you are</h2>
-        <p class="support">Coffee, dinner, or a night between stages.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="mailto:hello@refugiodociclista.pt">Reserve</a>
+      <section class="section" id="offer">
+        <div class="section-inner">
+          <h2>Fuel. Fix. Rest.</h2>
+          <p class="support">Hospitality for riders mid-journey — not the finish line, just the pause you deserve.</p>
+          <ul class="offer-list">
+            <li>
+              <h3>Café &amp; kitchen</h3>
+              <p>Espresso, cold drinks, and a proper meal before you roll on.</p>
+            </li>
+            <li>
+              <h3>Bike care</h3>
+              <p>Secure storage, wash, pump, and tools in the shade.</p>
+            </li>
+            <li>
+              <h3>Stay over</h3>
+              <p>Quiet rooms if tonight’s the night — wheels ready at dawn.</p>
+            </li>
+            <li>
+              <h3>Back to the N2</h3>
+              <p>The national road waits outside the gate. Rest, then ride.</p>
+            </li>
+          </ul>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <footer class="footer">Refúgio do Ciclista · N2 · Portugal</footer>
+      <section class="section" id="route">
+        <div class="section-inner">
+          <h2>Pause, don’t stop forever</h2>
+          <p class="support">Open road beside the house. Gate ajar. Your bike cooling in the gold light.</p>
+          <p class="quote">You earned this stop. Shower, supper — then as many more kilometres as you want.</p>
+        </div>
+      </section>
+
+      <section class="section" id="stay">
+        <div class="section-inner">
+          <h2>Come as you are</h2>
+          <p class="support">Coffee, dinner, or a night between stages — then continue when it feels right.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="mailto:hello@refugiodociclista.pt">Reserve</a>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">Refúgio do Ciclista · N2 · Portugal</footer>
+    </div>
   </div>
 
   <div class="theme theme-studio">
-    <header class="hero">
-      <div class="scene" role="img" aria-label="Boutique pilates studio interior facing a glass front with jungle and sea beyond, sheer curtains and reformer equipment in warm pre-sunset light"></div>
-      <div class="hero-content">
-        <h1 class="brand">Studio <em>Lau</em></h1>
-        <p class="lead">Inside the glass, looking out to jungle and sea — boutique pilates in Santa Teresa, in the soft hour before sunset.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="#book">Book a class</a>
-          <a class="btn btn-ghost" href="#method">Method</a>
+    <div class="bg-photo" aria-hidden="true">
+      <div class="frame"></div>
+      <div class="veil"></div>
+    </div>
+
+    <div class="page">
+      <header class="hero">
+        <div class="hero-content">
+          <h1 class="brand">Studio <em>Lau</em></h1>
+          <p class="lead">Inside the glass, looking out to jungle and sea — boutique pilates in Santa Teresa, in the soft hour before sunset.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#book">Book a class</a>
+            <a class="btn btn-ghost" href="#method">Method</a>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
 
-    <section class="section section-method" id="method">
-      <div class="section-inner">
-        <h2>Strong &amp; precise</h2>
-        <p class="support">Small groups, sharp coaching, reformer-led training.</p>
-        <ul class="offer-list">
-          <li>
-            <h3>Reformer classes</h3>
-            <p>Carriage work for strength, control, and mobility.</p>
-          </li>
-          <li>
-            <h3>Athletic focus</h3>
-            <p>For people who move hard outside the studio too.</p>
-          </li>
-          <li>
-            <h3>Boutique room</h3>
-            <p>Light, calm, premium equipment — no crowds.</p>
-          </li>
-          <li>
-            <h3>Santa Teresa</h3>
-            <p>A quiet base with destination energy.</p>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section section-place" id="place">
-      <div class="section-inner">
-        <h2>Santa Teresa</h2>
-        <p class="support">Sunshine, space, and sessions that stay with you.</p>
-        <p class="quote">Wood, sage, and open glass — train while the light turns gold over the water.</p>
-      </div>
-    </section>
-
-    <section class="section section-book" id="book">
-      <div class="section-inner" style="text-align:center">
-        <h2>Book a session</h2>
-        <p class="support" style="margin-inline:auto">Morning or evening — step onto the reformer.</p>
-        <div class="cta-row" style="justify-content:center">
-          <a class="btn btn-primary" href="mailto:hello@studiolau.pt">Book now</a>
+      <section class="section" id="method">
+        <div class="section-inner">
+          <h2>Strong &amp; precise</h2>
+          <p class="support">Small groups, sharp coaching, reformer-led training.</p>
+          <ul class="offer-list">
+            <li>
+              <h3>Reformer classes</h3>
+              <p>Carriage work for strength, control, and mobility.</p>
+            </li>
+            <li>
+              <h3>Athletic focus</h3>
+              <p>For people who move hard outside the studio too.</p>
+            </li>
+            <li>
+              <h3>Boutique room</h3>
+              <p>Light, calm, premium equipment — no crowds.</p>
+            </li>
+            <li>
+              <h3>Santa Teresa</h3>
+              <p>A quiet base with destination energy.</p>
+            </li>
+          </ul>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <footer class="footer">Studio Lau · Santa Teresa</footer>
+      <section class="section" id="place">
+        <div class="section-inner">
+          <h2>Santa Teresa</h2>
+          <p class="support">Sunshine, space, and sessions that stay with you.</p>
+          <p class="quote">Wood, sage, and open glass — train while the light turns gold over the water.</p>
+        </div>
+      </section>
+
+      <section class="section" id="book">
+        <div class="section-inner">
+          <h2>Book a session</h2>
+          <p class="support">Morning or evening — step onto the reformer.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="mailto:hello@studiolau.pt">Book now</a>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">Studio Lau · Santa Teresa</footer>
+    </div>
   </div>
 
   <script>
@@ -437,6 +436,7 @@
       const switcher = document.getElementById("theme-switch");
 
       let targetX = 0.5, targetY = 0.5, currentX = 0.5, currentY = 0.5;
+      let scrollTarget = 0, scrollCurrent = 0;
       let studioMode = false;
       const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -448,6 +448,12 @@
         document.title = on ? "Studio Lau" : "Refúgio do Ciclista";
         switcher.textContent = on ? "View Refúgio do Ciclista" : "View Studio Lau";
         window.scrollTo({ top: 0, behavior: prefersReduced ? "auto" : "smooth" });
+        updateScroll();
+      }
+
+      function updateScroll() {
+        const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+        scrollTarget = Math.min(1, Math.max(0, window.scrollY / max));
       }
 
       switcher.addEventListener("click", (e) => {
@@ -460,14 +466,22 @@
         targetY = e.clientY / window.innerHeight;
       }, { passive: true });
 
+      window.addEventListener("scroll", updateScroll, { passive: true });
+      window.addEventListener("resize", updateScroll, { passive: true });
+      updateScroll();
+
       function frame() {
         const ease = prefersReduced ? 1 : 0.08;
         currentX += (targetX - currentX) * ease;
         currentY += (targetY - currentY) * ease;
+        scrollCurrent += (scrollTarget - scrollCurrent) * (prefersReduced ? 1 : 0.1);
+
         root.style.setProperty("--mx", `${(currentX * 100).toFixed(2)}%`);
         root.style.setProperty("--my", `${(currentY * 100).toFixed(2)}%`);
         root.style.setProperty("--px", ((currentX - 0.5) * 2).toFixed(3));
         root.style.setProperty("--py", ((currentY - 0.5) * 2).toFixed(3));
+        root.style.setProperty("--scroll", scrollCurrent.toFixed(4));
+
         requestAnimationFrame(frame);
       }
 
