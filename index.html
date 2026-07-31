@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Refúgio do Ciclista</title>
+  <title>Laura · Pilates</title>
+  <meta name="description" content="Laura — Pilates instructor based in Lisbon. Certified at Promofitness, practiced in Portugal and the Netherlands. Coaching for strength, mobility, and lasting ease in the body.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --mx: 50%;
@@ -14,6 +15,9 @@
       --px: 0;
       --py: 0;
       --scroll: 0;
+      --ink: #f7f3ec;
+      --accent: #e8c47a;
+      --deep: #14201c;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -22,65 +26,32 @@
 
     body {
       font-family: "Outfit", system-ui, sans-serif;
-      background: #1a1410;
-      color: #f2efe8;
+      background: var(--deep);
+      color: var(--ink);
     }
 
     a { color: inherit; text-decoration: none; }
 
-    .theme { display: none; }
-    .theme.is-active { display: block; }
-
-    .switcher {
-      position: fixed;
-      top: 1.25rem;
-      right: 1.25rem;
-      z-index: 40;
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      padding: 0.65rem 0.95rem;
-      border: 1px solid rgba(255, 255, 255, 0.28);
-      background: rgba(0, 0, 0, 0.28);
-      backdrop-filter: blur(12px);
-      color: #fff;
-    }
-
-    body.is-studio .switcher {
-      background: rgba(255, 255, 255, 0.12);
-    }
-
-    /* Shared photo background — pans & opens as you scroll */
     .bg-photo {
       position: fixed;
       inset: 0;
       z-index: 0;
-      pointer-events: none;
       overflow: hidden;
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .theme.is-active .bg-photo {
-      opacity: 1;
-      visibility: visible;
+      pointer-events: none;
     }
 
     .bg-photo .frame {
       position: absolute;
-      inset: -8%;
-      background-color: #1a1410;
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
+      inset: -10%;
+      background:
+        #14201c url("assets/studio-lau-hero.png") center / cover no-repeat;
       transform:
         translate3d(
-          calc(var(--px) * -14px + var(--scroll) * -4%),
-          calc(var(--py) * -10px + var(--scroll) * 6%),
+          calc(var(--px) * -14px + var(--scroll) * -3%),
+          calc(var(--py) * -10px + var(--scroll) * 5%),
           0
         )
-        scale(calc(1.22 - var(--scroll) * 0.16));
+        scale(calc(1.24 - var(--scroll) * 0.18));
       will-change: transform;
     }
 
@@ -88,33 +59,13 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 55% 45% at var(--mx) var(--my), rgba(255, 170, 80, 0.1), transparent 60%),
+        radial-gradient(ellipse 50% 40% at var(--mx) var(--my), rgba(255, 190, 120, 0.1), transparent 55%),
         linear-gradient(
           180deg,
-          rgba(12, 8, 5, calc(0.12 + var(--scroll) * 0.08)) 0%,
-          rgba(12, 8, 5, calc(0.05 + var(--scroll) * 0.12)) 35%,
-          rgba(12, 8, 5, calc(0.28 + var(--scroll) * 0.2)) 100%
+          rgba(12, 18, 16, calc(0.18 + var(--scroll) * 0.1)) 0%,
+          rgba(12, 18, 16, calc(0.08 + var(--scroll) * 0.12)) 38%,
+          rgba(12, 18, 16, calc(0.35 + var(--scroll) * 0.25)) 100%
         );
-      pointer-events: none;
-    }
-
-    .theme-studio .bg-photo .veil {
-      background:
-        radial-gradient(ellipse 50% 40% at var(--mx) var(--my), rgba(255, 180, 100, 0.08), transparent 55%),
-        linear-gradient(
-          180deg,
-          rgba(14, 20, 18, calc(0.1 + var(--scroll) * 0.08)) 0%,
-          rgba(14, 20, 18, calc(0.06 + var(--scroll) * 0.1)) 40%,
-          rgba(14, 20, 18, calc(0.3 + var(--scroll) * 0.22)) 100%
-        );
-    }
-
-    .theme-road .bg-photo .frame {
-      background-image: url("assets/refugio-ciclista-hero.png");
-    }
-
-    .theme-studio .bg-photo .frame {
-      background-image: url("assets/studio-lau-hero.png");
     }
 
     .page {
@@ -131,31 +82,36 @@
     }
 
     .hero-content {
-      max-width: 40rem;
+      max-width: 38rem;
       transform: translate3d(calc(var(--px) * 5px), calc(var(--py) * 3px), 0);
     }
 
-    .theme-road .brand {
-      font-family: "Bebas Neue", sans-serif;
-      font-size: clamp(4.2rem, 13vw, 8rem);
+    .brand {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(4.6rem, 14vw, 8.5rem);
+      font-weight: 600;
+      font-style: italic;
+      letter-spacing: -0.03em;
       line-height: 0.9;
-      letter-spacing: 0.04em;
-      margin-bottom: 1rem;
-      text-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
+      margin-bottom: 1.1rem;
+      text-shadow: 0 2px 28px rgba(0, 0, 0, 0.35);
     }
-
-    .theme-road .brand span { color: #f0d045; }
 
     .lead {
-      font-size: clamp(1.05rem, 2vw, 1.2rem);
+      font-size: clamp(1.05rem, 2.1vw, 1.25rem);
+      font-weight: 400;
       line-height: 1.55;
-      color: rgba(255, 245, 230, 0.94);
-      margin-bottom: 1.75rem;
-      max-width: 30rem;
-      text-shadow: 0 1px 14px rgba(0, 0, 0, 0.4);
+      color: rgba(247, 243, 236, 0.92);
+      max-width: 28rem;
+      margin-bottom: 1.85rem;
+      text-shadow: 0 1px 14px rgba(0, 0, 0, 0.35);
     }
 
-    .cta-row { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
 
     .btn {
       display: inline-flex;
@@ -164,302 +120,202 @@
       font-weight: 700;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      padding: 0.9rem 1.25rem;
+      padding: 0.95rem 1.3rem;
       border: 1px solid transparent;
-      transition: transform 0.2s ease, background 0.2s ease;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
       backdrop-filter: blur(8px);
     }
 
     .btn:hover { transform: translateY(-1px); }
 
-    .theme-road .btn-primary { background: #f0d045; color: #1a2418; }
-    .theme-road .btn-ghost {
-      border-color: rgba(242, 239, 232, 0.45);
-      color: #f2efe8;
-      background: rgba(0, 0, 0, 0.18);
+    .btn-primary {
+      background: var(--ink);
+      color: #243830;
+    }
+
+    .btn-ghost {
+      border-color: rgba(247, 243, 236, 0.45);
+      color: var(--ink);
+      background: rgba(0, 0, 0, 0.16);
     }
 
     .section {
-      padding: clamp(3.2rem, 7vw, 5.5rem) clamp(1.5rem, 5vw, 4rem);
+      padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.5rem, 5vw, 4rem);
     }
 
-    .section-inner {
-      width: min(980px, 100%);
+    .panel {
+      width: min(920px, 100%);
       margin: 0 auto;
-      padding: clamp(1.6rem, 4vw, 2.4rem);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(16, 12, 8, 0.22);
+      padding: clamp(1.7rem, 4vw, 2.6rem);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(16, 24, 20, 0.2);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
     }
 
-    .section h2 {
-      font-family: "Bebas Neue", sans-serif;
-      font-size: clamp(2.2rem, 6vw, 3.4rem);
-      letter-spacing: 0.04em;
-      margin-bottom: 0.75rem;
+    .panel h2 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(2.1rem, 5vw, 3rem);
+      font-weight: 600;
+      font-style: italic;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin-bottom: 0.85rem;
     }
 
-    .section .support {
-      font-size: 1.02rem;
-      line-height: 1.55;
-      max-width: 32rem;
-      opacity: 0.82;
-      margin-bottom: 2rem;
+    .panel .support {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      max-width: 36rem;
+      color: rgba(247, 243, 236, 0.84);
+      margin-bottom: 1.75rem;
     }
 
+    .panel .support:last-child {
+      margin-bottom: 0;
+    }
+
+    .cred-list,
     .offer-list {
       list-style: none;
       display: grid;
-      gap: 1.75rem 2.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem 2.25rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
 
+    .cred-list h3,
     .offer-list h3 {
-      font-size: 0.95rem;
+      font-size: 0.78rem;
       font-weight: 700;
-      margin-bottom: 0.4rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.45rem;
     }
 
+    .cred-list p,
     .offer-list p {
-      font-size: 0.92rem;
-      line-height: 1.5;
-      opacity: 0.72;
+      font-size: 0.98rem;
+      line-height: 1.55;
+      color: rgba(247, 243, 236, 0.78);
     }
 
     .quote {
       font-family: "Cormorant Garamond", Georgia, serif;
       font-style: italic;
-      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      font-size: clamp(1.45rem, 3.2vw, 2rem);
       line-height: 1.35;
-      max-width: 30rem;
+      color: var(--accent);
+      max-width: 28rem;
     }
 
-    .theme-road .quote { color: #f0d045; }
-
     .footer {
-      position: relative;
-      z-index: 1;
-      padding: 1.75rem clamp(1.5rem, 5vw, 4rem) 2.5rem;
+      padding: 1.5rem clamp(1.5rem, 5vw, 4rem) 2.75rem;
       font-size: 0.72rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(255, 245, 230, 0.55);
+      color: rgba(247, 243, 236, 0.5);
       text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
     }
 
-    /* Studio */
-    .theme-studio { color: #faf7f1; }
-
-    .theme-studio .brand {
-      font-size: clamp(4rem, 12vw, 7.2rem);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 0.95;
-      margin-bottom: 1rem;
-      text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
-    }
-
-    .theme-studio .brand em {
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-style: italic;
-      font-weight: 600;
-      color: #ffd27a;
-    }
-
-    .theme-studio .btn-primary { background: #faf7f1; color: #2f4a42; }
-    .theme-studio .btn-ghost {
-      border-color: rgba(250, 247, 241, 0.5);
-      color: #faf7f1;
-      background: rgba(0, 0, 0, 0.16);
-    }
-
-    .theme-studio .section-inner {
-      background: rgba(18, 28, 24, 0.2);
-      border-color: rgba(255, 255, 255, 0.14);
-    }
-
-    .theme-studio .section h2 {
-      font-family: "Outfit", system-ui, sans-serif;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    .theme-studio .quote { color: #ffd27a; }
-
     @media (prefers-reduced-motion: reduce) {
-      .bg-photo .frame {
-        transform: scale(1.08);
-      }
+      .bg-photo .frame { transform: scale(1.08); }
     }
   </style>
 </head>
 <body>
-  <button class="switcher" type="button" id="theme-switch">View Studio Lau</button>
-
-  <div class="theme theme-road is-active">
-    <div class="bg-photo" aria-hidden="true">
-      <div class="frame"></div>
-      <div class="veil"></div>
-    </div>
-
-    <div class="page">
-      <header class="hero">
-        <div class="hero-content">
-          <h1 class="brand">Refúgio <span>do Ciclista</span></h1>
-          <p class="lead">A well-earned stop on Portugal’s N2 — pull off, breathe, eat, maybe stay. The road is still there when you’re ready.</p>
-          <div class="cta-row">
-            <a class="btn btn-primary" href="#stay">Book a stay</a>
-            <a class="btn btn-ghost" href="#offer">Facilities</a>
-          </div>
-        </div>
-      </header>
-
-      <section class="section" id="offer">
-        <div class="section-inner">
-          <h2>Fuel. Fix. Rest.</h2>
-          <p class="support">Hospitality for riders mid-journey — not the finish line, just the pause you deserve.</p>
-          <ul class="offer-list">
-            <li>
-              <h3>Café &amp; kitchen</h3>
-              <p>Espresso, cold drinks, and a proper meal before you roll on.</p>
-            </li>
-            <li>
-              <h3>Bike care</h3>
-              <p>Secure storage, wash, pump, and tools in the shade.</p>
-            </li>
-            <li>
-              <h3>Stay over</h3>
-              <p>Quiet rooms if tonight’s the night — wheels ready at dawn.</p>
-            </li>
-            <li>
-              <h3>Back to the N2</h3>
-              <p>The national road waits outside the gate. Rest, then ride.</p>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <section class="section" id="route">
-        <div class="section-inner">
-          <h2>Pause, don’t stop forever</h2>
-          <p class="support">Open road beside the house. Gate ajar. Your bike cooling in the gold light.</p>
-          <p class="quote">You earned this stop. Shower, supper — then as many more kilometres as you want.</p>
-        </div>
-      </section>
-
-      <section class="section" id="stay">
-        <div class="section-inner">
-          <h2>Come as you are</h2>
-          <p class="support">Coffee, dinner, or a night between stages — then continue when it feels right.</p>
-          <div class="cta-row">
-            <a class="btn btn-primary" href="mailto:hello@refugiodociclista.pt">Reserve</a>
-          </div>
-        </div>
-      </section>
-
-      <footer class="footer">Refúgio do Ciclista · N2 · Portugal</footer>
-    </div>
+  <div class="bg-photo" aria-hidden="true">
+    <div class="frame"></div>
+    <div class="veil"></div>
   </div>
 
-  <div class="theme theme-studio">
-    <div class="bg-photo" aria-hidden="true">
-      <div class="frame"></div>
-      <div class="veil"></div>
-    </div>
-
-    <div class="page">
-      <header class="hero">
-        <div class="hero-content">
-          <h1 class="brand">Studio <em>Lau</em></h1>
-          <p class="lead">Inside the glass, looking out to jungle and sea — boutique pilates in Santa Teresa, in the soft hour before sunset.</p>
-          <div class="cta-row">
-            <a class="btn btn-primary" href="#book">Book a class</a>
-            <a class="btn btn-ghost" href="#method">Method</a>
-          </div>
+  <main class="page">
+    <header class="hero">
+      <div class="hero-content">
+        <h1 class="brand">Laura</h1>
+        <p class="lead">Pilates instructor in Lisbon — helping you feel freer in your body, with strength, mobility, and grace for the long run.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#coach">Train with Laura</a>
+          <a class="btn btn-ghost" href="#path">Her path</a>
         </div>
-      </header>
+      </div>
+    </header>
 
-      <section class="section" id="method">
-        <div class="section-inner">
-          <h2>Strong &amp; precise</h2>
-          <p class="support">Small groups, sharp coaching, reformer-led training.</p>
-          <ul class="offer-list">
-            <li>
-              <h3>Reformer classes</h3>
-              <p>Carriage work for strength, control, and mobility.</p>
-            </li>
-            <li>
-              <h3>Athletic focus</h3>
-              <p>For people who move hard outside the studio too.</p>
-            </li>
-            <li>
-              <h3>Boutique room</h3>
-              <p>Light, calm, premium equipment — no crowds.</p>
-            </li>
-            <li>
-              <h3>Santa Teresa</h3>
-              <p>A quiet base with destination energy.</p>
-            </li>
-          </ul>
+    <section class="section" id="path">
+      <div class="panel">
+        <h2>The path</h2>
+        <p class="support">Laura invested four months at Promofitness in Lisbon to earn her Pilates certification, then built her practice across studios in Portugal and the Netherlands — including PLTS and Saints&amp;Stars.</p>
+        <ul class="cred-list">
+          <li>
+            <h3>Certification</h3>
+            <p>Pilates instructor training at Promofitness, Lisbon.</p>
+          </li>
+          <li>
+            <h3>Studios</h3>
+            <p>Hands-on practice in Portugal and the Netherlands — PLTS, Saints&amp;Stars, and beyond.</p>
+          </li>
+          <li>
+            <h3>Naturopatia</h3>
+            <p>A two-year degree at Escola Tradicional de Medicina Chinesa — another lens on a healthy body and mind.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="practice">
+      <div class="panel">
+        <h2>How she coaches</h2>
+        <p class="support">Precise, athletic, attentive. Sessions that build control and ease — so you move better in the studio and outside it.</p>
+        <ul class="offer-list">
+          <li>
+            <h3>Well-being</h3>
+            <p>Guidance that supports how you feel day to day, not only how a session looks.</p>
+          </li>
+          <li>
+            <h3>Freedom in the body</h3>
+            <p>More range, less tension — so movement feels available again.</p>
+          </li>
+          <li>
+            <h3>Mobility &amp; grace</h3>
+            <p>Preserve how you move as life gets longer — strong, fluid, and elegant.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="life">
+      <div class="panel">
+        <h2>A fitness life</h2>
+        <p class="support">Beyond teaching, Laura trains with intention: gym strength work twice a week, and a new craft on the court — tennis — always learning with her body.</p>
+        <p class="quote">Strong in the gym, curious on the court — always learning with her body, then bringing that honesty into every session.</p>
+      </div>
+    </section>
+
+    <section class="section" id="coach">
+      <div class="panel">
+        <h2>Available to coach you</h2>
+        <p class="support">Based in Lisbon, Portugal. Reach out if you want to move with more ease, strength, and grace — and feel freer in your own body.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="mailto:hello@laurapilates.com">Get in touch</a>
+          <a class="btn btn-ghost" href="#path">Read her path</a>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="section" id="place">
-        <div class="section-inner">
-          <h2>Santa Teresa</h2>
-          <p class="support">Sunshine, space, and sessions that stay with you.</p>
-          <p class="quote">Wood, sage, and open glass — train while the light turns gold over the water.</p>
-        </div>
-      </section>
-
-      <section class="section" id="book">
-        <div class="section-inner">
-          <h2>Book a session</h2>
-          <p class="support">Morning or evening — step onto the reformer.</p>
-          <div class="cta-row">
-            <a class="btn btn-primary" href="mailto:hello@studiolau.pt">Book now</a>
-          </div>
-        </div>
-      </section>
-
-      <footer class="footer">Studio Lau · Santa Teresa</footer>
-    </div>
-  </div>
+    <footer class="footer">Laura · Pilates · Lisbon, Portugal</footer>
+  </main>
 
   <script>
     (() => {
       const root = document.documentElement;
-      const body = document.body;
-      const road = document.querySelector(".theme-road");
-      const studio = document.querySelector(".theme-studio");
-      const switcher = document.getElementById("theme-switch");
-
       let targetX = 0.5, targetY = 0.5, currentX = 0.5, currentY = 0.5;
       let scrollTarget = 0, scrollCurrent = 0;
-      let studioMode = false;
       const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      function setStudio(on) {
-        studioMode = on;
-        body.classList.toggle("is-studio", on);
-        road.classList.toggle("is-active", !on);
-        studio.classList.toggle("is-active", on);
-        document.title = on ? "Studio Lau" : "Refúgio do Ciclista";
-        switcher.textContent = on ? "View Refúgio do Ciclista" : "View Studio Lau";
-        window.scrollTo({ top: 0, behavior: prefersReduced ? "auto" : "smooth" });
-        updateScroll();
-      }
 
       function updateScroll() {
         const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
         scrollTarget = Math.min(1, Math.max(0, window.scrollY / max));
       }
-
-      switcher.addEventListener("click", (e) => {
-        e.stopPropagation();
-        setStudio(!studioMode);
-      });
 
       window.addEventListener("pointermove", (e) => {
         targetX = e.clientX / window.innerWidth;
