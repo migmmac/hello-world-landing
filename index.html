@@ -15,9 +15,10 @@
       --px: 0;
       --py: 0;
       --scroll: 0;
-      --ink: #f7f3ec;
-      --accent: #e8c47a;
-      --deep: #14201c;
+      --ink: #f4eeea;
+      --accent: #e7c2c0;
+      --wine: #7c1c28;
+      --deep: #1a1416;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -41,8 +42,8 @@
       align-items: center;
       gap: 0.15rem;
       padding: 0.3rem;
-      border: 1px solid rgba(255, 255, 255, 0.28);
-      background: rgba(0, 0, 0, 0.28);
+      border: 1px solid rgba(231, 194, 192, 0.35);
+      background: rgba(26, 16, 18, 0.35);
       backdrop-filter: blur(12px);
     }
 
@@ -55,18 +56,18 @@
       padding: 0.45rem 0.7rem;
       border: none;
       background: transparent;
-      color: rgba(247, 243, 236, 0.55);
+      color: rgba(244, 238, 234, 0.55);
       cursor: pointer;
       transition: color 0.2s ease, background 0.2s ease;
     }
 
     .lang-toggle button.is-active {
-      background: rgba(247, 243, 236, 0.92);
-      color: #243830;
+      background: var(--wine);
+      color: #f6f1ee;
     }
 
     .lang-toggle button:not(.is-active):hover {
-      color: rgba(247, 243, 236, 0.9);
+      color: rgba(244, 238, 234, 0.9);
     }
 
     .bg-photo {
@@ -96,12 +97,12 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 50% 40% at var(--mx) var(--my), rgba(255, 190, 120, 0.1), transparent 55%),
+        radial-gradient(ellipse 50% 40% at var(--mx) var(--my), rgba(124, 28, 40, 0.12), transparent 55%),
         linear-gradient(
           180deg,
-          rgba(12, 18, 16, calc(0.18 + var(--scroll) * 0.1)) 0%,
-          rgba(12, 18, 16, calc(0.08 + var(--scroll) * 0.12)) 38%,
-          rgba(12, 18, 16, calc(0.35 + var(--scroll) * 0.25)) 100%
+          rgba(22, 14, 16, calc(0.18 + var(--scroll) * 0.1)) 0%,
+          rgba(22, 14, 16, calc(0.08 + var(--scroll) * 0.12)) 38%,
+          rgba(22, 14, 16, calc(0.35 + var(--scroll) * 0.25)) 100%
         );
     }
 
@@ -138,7 +139,7 @@
       font-size: clamp(1.05rem, 2.1vw, 1.25rem);
       font-weight: 400;
       line-height: 1.55;
-      color: rgba(247, 243, 236, 0.92);
+      color: rgba(244, 238, 234, 0.92);
       max-width: 30rem;
       margin-bottom: 1.85rem;
       text-shadow: 0 1px 14px rgba(0, 0, 0, 0.35);
@@ -166,14 +167,14 @@
     .btn:hover { transform: translateY(-1px); }
 
     .btn-primary {
-      background: var(--ink);
-      color: #243830;
+      background: var(--wine);
+      color: #f6f1ee;
     }
 
     .btn-ghost {
-      border-color: rgba(247, 243, 236, 0.45);
+      border-color: rgba(231, 194, 192, 0.55);
       color: var(--ink);
-      background: rgba(0, 0, 0, 0.16);
+      background: rgba(26, 14, 16, 0.22);
     }
 
     .section {
@@ -184,8 +185,8 @@
       width: min(920px, 100%);
       margin: 0 auto;
       padding: clamp(1.7rem, 4vw, 2.6rem);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      background: rgba(16, 24, 20, 0.2);
+      border: 1px solid rgba(231, 194, 192, 0.18);
+      background: rgba(26, 16, 18, 0.22);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
     }
@@ -204,7 +205,7 @@
       font-size: 1.05rem;
       line-height: 1.6;
       max-width: 38rem;
-      color: rgba(247, 243, 236, 0.84);
+      color: rgba(244, 238, 234, 0.84);
       margin-bottom: 1.75rem;
     }
 
@@ -234,7 +235,7 @@
     .offer-list p {
       font-size: 0.98rem;
       line-height: 1.55;
-      color: rgba(247, 243, 236, 0.78);
+      color: rgba(244, 238, 234, 0.78);
     }
 
     .quote {
@@ -251,7 +252,7 @@
       font-size: 0.72rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(247, 243, 236, 0.5);
+      color: rgba(244, 238, 234, 0.5);
       text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
     }
 
