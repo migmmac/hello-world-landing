@@ -1,5 +1,5 @@
-# Laura · Pilates
+# L'Atelier Pilates
 
-Professional presentation site for Laura, Pilates instructor based in Lisbon.
+Apresentação da Laura e do atelier, em Lisboa.
 
-Open `index.html` locally, or push to GitHub Pages to publish.
+Abrir `index.html` localmente, ou publicar com GitHub Pages.
