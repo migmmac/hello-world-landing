@@ -123,23 +123,15 @@
       transform: translate3d(calc(var(--px) * 5px), calc(var(--py) * 3px), 0);
     }
 
-    .brand-mark {
-      width: min(240px, 58vw);
-      height: auto;
-      display: block;
-      margin-bottom: 1.15rem;
-      filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.35));
+    .brand {
+      margin-bottom: 1.1rem;
     }
 
-    .brand {
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: clamp(4.6rem, 14vw, 8.5rem);
-      font-weight: 600;
-      font-style: italic;
-      letter-spacing: -0.03em;
-      line-height: 0.9;
-      margin-bottom: 1.1rem;
-      text-shadow: 0 2px 28px rgba(0, 0, 0, 0.35);
+    .brand-mark {
+      width: min(34rem, 88vw);
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.35));
     }
 
     .lead {
@@ -282,8 +274,9 @@
   <main class="page">
     <header class="hero">
       <div class="hero-content">
-        <img class="brand-mark" src="assets/latelier-lettering.png" alt="L'Atelier Pilates">
-        <h1 class="brand">Laura</h1>
+        <h1 class="brand">
+          <img class="brand-mark" src="assets/latelier-lettering.png" alt="L'Atelier Pilates">
+        </h1>
         <p class="lead" data-i18n="lead">Instructora de Pilates em Lisboa — para se sentir mais livre no seu corpo, com força, mobilidade e elegância ao longo da vida.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="#coach" data-i18n="ctaCoach">Treinar com a Laura</a>
