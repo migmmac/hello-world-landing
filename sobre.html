@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre a Laura · Leme Pilates</title>
+  <meta name="description" id="meta-desc" content="Laura, instrutora do Leme Pilates. Formação completa de Instrução em Pilates Contemporâneo na Promofitness, em Lisboa.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --px: 0;
+      --py: 0;
+      --scroll: 0;
+      --oxblood: #591c2b;
+      --ivory: #f1ede5;
+      --muted: rgba(241, 237, 229, 0.78);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Outfit", system-ui, sans-serif;
+      background: #2a2624;
+      color: var(--ivory);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .lang-toggle {
+      position: fixed;
+      top: 1.15rem;
+      right: 1.15rem;
+      z-index: 40;
+      display: inline-flex;
+      padding: 0.22rem;
+      border: 1px solid rgba(241, 237, 229, 0.28);
+      background: rgba(28, 22, 20, 0.35);
+      backdrop-filter: blur(12px);
+    }
+
+    .lang-toggle button {
+      font-family: inherit;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.45rem 0.7rem;
+      border: none;
+      background: transparent;
+      color: rgba(241, 237, 229, 0.55);
+      cursor: pointer;
+    }
+
+    .lang-toggle button.is-active {
+      background: var(--oxblood);
+      color: var(--ivory);
+    }
+
+    .topbar {
+      position: fixed;
+      top: 1.15rem;
+      left: 1.15rem;
+      z-index: 40;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.7rem 0.9rem;
+      border: 1px solid rgba(241, 237, 229, 0.28);
+      background: rgba(28, 22, 20, 0.35);
+      backdrop-filter: blur(12px);
+    }
+
+    .bg-photo {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .bg-photo .frame {
+      position: absolute;
+      inset: -8%;
+      background: #2a2624 url("assets/leme-studio.jpg") center / cover no-repeat;
+      transform:
+        translate3d(calc(var(--px) * -12px), calc(var(--py) * -8px + var(--scroll) * 4%), 0)
+        scale(calc(1.18 - var(--scroll) * 0.12));
+    }
+
+    .bg-photo .veil {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(22, 16, 18, 0.45) 0%,
+        rgba(22, 16, 18, calc(0.35 + var(--scroll) * 0.2)) 100%
+      );
+    }
+
+    .page { position: relative; z-index: 1; padding-top: 5.5rem; }
+
+    .hero { padding: clamp(1.5rem, 5vw, 4rem) clamp(1.5rem, 5vw, 4rem) 1.2rem; }
+
+    .kicker {
+      margin-bottom: 0.6rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-family: "Bodoni Moda", serif;
+      font-weight: 500;
+      font-size: clamp(3.4rem, 8vw, 5.5rem);
+      letter-spacing: -0.03em;
+      line-height: 0.9;
+    }
+
+    .section { padding: 0 clamp(1.5rem, 5vw, 4rem) clamp(1.1rem, 2.5vw, 1.4rem); }
+
+    .panel {
+      width: min(920px, 100%);
+      margin: 0 auto;
+      padding: clamp(1.6rem, 4vw, 2.4rem);
+      background: rgba(28, 22, 22, 0.28);
+      border: 1px solid rgba(241, 237, 229, 0.16);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .panel h2 {
+      margin-bottom: 0.8rem;
+      font-family: "Bodoni Moda", serif;
+      font-weight: 500;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      letter-spacing: -0.03em;
+    }
+
+    .support {
+      max-width: 40rem;
+      margin-bottom: 1.5rem;
+      font-size: 1.02rem;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .support:last-child { margin-bottom: 0; }
+
+    .list {
+      list-style: none;
+      display: grid;
+      gap: 1.3rem 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    }
+
+    .list h3 {
+      margin-bottom: 0.35rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .list p, .quote {
+      font-size: 0.98rem;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    .quote {
+      font-family: "Bodoni Moda", serif;
+      font-size: clamp(1.45rem, 3vw, 1.9rem);
+      line-height: 1.25;
+      color: var(--ivory);
+    }
+
+    .cta-row { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.95rem 1.25rem;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary { background: var(--oxblood); color: var(--ivory); }
+    .btn-ghost {
+      border-color: rgba(241, 237, 229, 0.5);
+      background: rgba(20, 14, 16, 0.2);
+    }
+
+    .footer {
+      padding: 1.6rem clamp(1.5rem, 5vw, 4rem) 2.6rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(241, 237, 229, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <a class="topbar" href="index.html" data-i18n="back">Leme</a>
+  <div class="lang-toggle" role="group" aria-label="Idioma">
+    <button type="button" data-lang="pt" class="is-active" aria-pressed="true">PT</button>
+    <button type="button" data-lang="en" aria-pressed="false">EN</button>
+  </div>
+
+  <div class="bg-photo" aria-hidden="true">
+    <div class="frame"></div>
+    <div class="veil"></div>
+  </div>
+
+  <main class="page">
+    <header class="hero">
+      <p class="kicker" data-i18n="kicker">Leme Pilates</p>
+      <h1 data-i18n="title">Sobre a Laura</h1>
+    </header>
+
+    <section class="section">
+      <div class="panel">
+        <h2 data-i18n="pathTitle">O percurso</h2>
+        <p class="support" data-i18n="pathSupport">A Laura concluiu uma formação completa de Instrução em Pilates Contemporâneo na Promofitness, em Lisboa, e desenvolveu a sua prática em estúdios em Portugal e nos Países Baixos — incluindo PLTS e Saints&amp;Stars.</p>
+        <ul class="list">
+          <li>
+            <h3 data-i18n="certTitle">Certificação</h3>
+            <p data-i18n="certText">Formação completa de Instrução em Pilates Contemporâneo na Promofitness, Lisboa.</p>
+          </li>
+          <li>
+            <h3 data-i18n="studiosTitle">Estúdios</h3>
+            <p data-i18n="studiosText">Prática em Portugal e nos Países Baixos — PLTS, Saints&amp;Stars, entre outros.</p>
+          </li>
+          <li>
+            <h3 data-i18n="naturoTitle">Naturopatia</h3>
+            <p data-i18n="naturoText">Curso Geral de Naturopatia de três anos na Escola Tradicional de Medicina Chinesa — outra perspetiva sobre um corpo e uma mente saudáveis.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="panel">
+        <h2 data-i18n="practiceTitle">Como acompanha</h2>
+        <p class="support" data-i18n="practiceSupport">Sessões precisas, intencionais e atentas. Constroem controlo e leveza — para se mover melhor no estúdio e no dia a dia.</p>
+        <ul class="list">
+          <li>
+            <h3 data-i18n="wellTitle">Bem-estar</h3>
+            <p data-i18n="wellText">Um acompanhamento que cuida de como se sente no quotidiano — e não só de como corre uma sessão.</p>
+          </li>
+          <li>
+            <h3 data-i18n="freeTitle">Liberdade no corpo</h3>
+            <p data-i18n="freeText">Mais amplitude, menos tensão — para o movimento voltar a sentir-se disponível.</p>
+          </li>
+          <li>
+            <h3 data-i18n="mobTitle">Mobilidade e elegância</h3>
+            <p data-i18n="mobText">Preservar a forma como se move à medida que a vida se alonga — com força, fluidez e graça.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="panel">
+        <h2 data-i18n="lifeTitle">Uma vida em movimento</h2>
+        <p class="support" data-i18n="lifeSupport">Para além do pilates, a Laura complementa-se com treino de força e aprende uma nova disciplina — ténis.</p>
+        <p class="quote" data-i18n="lifeQuote">Forte no ginásio, curiosa em campo — a aprender sempre com o corpo, e a trazer essa honestidade a cada sessão.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="panel">
+        <h2 data-i18n="coachTitle">Disponível para treinar consigo</h2>
+        <p class="support" data-i18n="coachSupport">Com base em Lisboa. Entretanto, a Laura pode dar-lhe treino num local da sua conveniência. Entre em contacto se quiser mover-se com mais leveza, força e elegância.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://wa.me/351913396156" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          <a class="btn btn-ghost" href="https://instagram.com/lauramarpereira" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">Leme Pilates · Lisboa</footer>
+  </main>
+
+  <script>
+    (() => {
+      const meta = document.getElementById("meta-desc");
+      const buttons = document.querySelectorAll(".lang-toggle [data-lang]");
+      const copy = {
+        pt: {
+          meta: "Laura, instrutora do Leme Pilates. Formação completa de Instrução em Pilates Contemporâneo na Promofitness, em Lisboa.",
+          back: "Leme",
+          kicker: "Leme Pilates",
+          title: "Sobre a Laura",
+          pathTitle: "O percurso",
+          pathSupport: "A Laura concluiu uma formação completa de Instrução em Pilates Contemporâneo na Promofitness, em Lisboa, e desenvolveu a sua prática em estúdios em Portugal e nos Países Baixos — incluindo PLTS e Saints&Stars.",
+          certTitle: "Certificação",
+          certText: "Formação completa de Instrução em Pilates Contemporâneo na Promofitness, Lisboa.",
+          studiosTitle: "Estúdios",
+          studiosText: "Prática em Portugal e nos Países Baixos — PLTS, Saints&Stars, entre outros.",
+          naturoTitle: "Naturopatia",
+          naturoText: "Curso Geral de Naturopatia de três anos na Escola Tradicional de Medicina Chinesa — outra perspetiva sobre um corpo e uma mente saudáveis.",
+          practiceTitle: "Como acompanha",
+          practiceSupport: "Sessões precisas, intencionais e atentas. Constroem controlo e leveza — para se mover melhor no estúdio e no dia a dia.",
+          wellTitle: "Bem-estar",
+          wellText: "Um acompanhamento que cuida de como se sente no quotidiano — e não só de como corre uma sessão.",
+          freeTitle: "Liberdade no corpo",
+          freeText: "Mais amplitude, menos tensão — para o movimento voltar a sentir-se disponível.",
+          mobTitle: "Mobilidade e elegância",
+          mobText: "Preservar a forma como se move à medida que a vida se alonga — com força, fluidez e graça.",
+          lifeTitle: "Uma vida em movimento",
+          lifeSupport: "Para além do pilates, a Laura complementa-se com treino de força e aprende uma nova disciplina — ténis.",
+          lifeQuote: "Forte no ginásio, curiosa em campo — a aprender sempre com o corpo, e a trazer essa honestidade a cada sessão.",
+          coachTitle: "Disponível para treinar consigo",
+          coachSupport: "Com base em Lisboa. Entretanto, a Laura pode dar-lhe treino num local da sua conveniência. Entre em contacto se quiser mover-se com mais leveza, força e elegância."
+        },
+        en: {
+          meta: "Laura, instructor at Leme Pilates. Comprehensive Contemporary Pilates instruction at Promofitness, Lisbon.",
+          back: "Leme",
+          kicker: "Leme Pilates",
+          title: "About Laura",
+          pathTitle: "The path",
+          pathSupport: "Laura completed comprehensive Contemporary Pilates Instruction teacher training at Promofitness in Lisbon, then built her practice across studios in Portugal and the Netherlands — including PLTS and Saints&Stars.",
+          certTitle: "Certification",
+          certText: "Comprehensive Contemporary Pilates Instruction teacher training at Promofitness, Lisbon.",
+          studiosTitle: "Studios",
+          studiosText: "Hands-on practice in Portugal and the Netherlands — PLTS, Saints&Stars, among others.",
+          naturoTitle: "Naturopathy",
+          naturoText: "A three-year General Naturopathy course at Escola Tradicional de Medicina Chinesa — another lens on a healthy body and mind.",
+          practiceTitle: "How she coaches",
+          practiceSupport: "Precise, intentional, attentive sessions. They build control and ease — so you move better in the studio and in daily life.",
+          wellTitle: "Well-being",
+          wellText: "Guidance that looks after how you feel day to day — not only how a session goes.",
+          freeTitle: "Freedom in the body",
+          freeText: "More range, less tension — so movement feels available again.",
+          mobTitle: "Mobility and grace",
+          mobText: "Preserve how you move as life gets longer — with strength, fluidity and grace.",
+          lifeTitle: "A life in motion",
+          lifeSupport: "Beyond pilates, Laura complements her practice with strength training and is learning a new discipline — tennis.",
+          lifeQuote: "Strong in the gym, curious on the court — always learning with her body, and bringing that honesty into every session.",
+          coachTitle: "Available to train with you",
+          coachSupport: "Based in Lisbon. Meanwhile, Laura can coach you at a place of your convenience. Get in touch if you want to move with more ease, strength and grace."
+        }
+      };
+
+      function setLang(lang) {
+        const strings = copy[lang];
+        if (!strings) return;
+        document.documentElement.lang = lang;
+        document.title = lang === "en" ? "About Laura · Leme Pilates" : "Sobre a Laura · Leme Pilates";
+        meta.setAttribute("content", strings.meta);
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          if (strings[key] != null) el.textContent = strings[key];
+        });
+        buttons.forEach((btn) => {
+          const on = btn.getAttribute("data-lang") === lang;
+          btn.classList.toggle("is-active", on);
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        try { localStorage.setItem("leme-lang", lang); } catch (_) {}
+      }
+
+      buttons.forEach((btn) => btn.addEventListener("click", () => setLang(btn.getAttribute("data-lang"))));
+      let initial = "pt";
+      try {
+        const saved = localStorage.getItem("leme-lang");
+        if (saved === "pt" || saved === "en") initial = saved;
+      } catch (_) {}
+      setLang(initial);
+
+      const root = document.documentElement;
+      let tx = 0.5, ty = 0.5, cx = 0.5, cy = 0.5, st = 0, sc = 0;
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      function updateScroll() {
+        const max = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+        st = Math.min(1, scrollY / max);
+      }
+      addEventListener("pointermove", (e) => {
+        tx = e.clientX / innerWidth;
+        ty = e.clientY / innerHeight;
+      }, { passive: true });
+      addEventListener("scroll", updateScroll, { passive: true });
+      updateScroll();
+      function frame() {
+        const ease = reduced ? 1 : 0.08;
+        cx += (tx - cx) * ease;
+        cy += (ty - cy) * ease;
+        sc += (st - sc) * (reduced ? 1 : 0.1);
+        root.style.setProperty("--px", ((cx - 0.5) * 2).toFixed(3));
+        root.style.setProperty("--py", ((cy - 0.5) * 2).toFixed(3));
+        root.style.setProperty("--scroll", sc.toFixed(4));
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    })();
+  </script>
+</body>
+</html>

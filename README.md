@@ -1,5 +1,5 @@
-# Laura · Pilates
+# Leme Pilates
 
-Professional presentation site for Laura, Pilates instructor based in Lisbon.
+Site do estúdio. A Laura é a instrutora; o percurso dela está em `sobre.html`.
 
-Open `index.html` locally, or push to GitHub Pages to publish.
+Publicar com GitHub Pages.
