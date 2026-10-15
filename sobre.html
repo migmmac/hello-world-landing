@@ -5,10 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sobre a Laura · Leme Pilates</title>
   <meta name="description" id="meta-desc" content="Laura, instrutora do Leme Pilates. Formação completa de Instrução em Pilates Contemporâneo na Promofitness, em Lisboa.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    @font-face {
+      font-family: Fraunces;
+      src: url("assets/fonts/Fraunces-400.ttf") format("truetype");
+      font-weight: 400;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: Fraunces;
+      src: url("assets/fonts/Fraunces-700.ttf") format("truetype");
+      font-weight: 700;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: Manrope;
+      src: url("assets/fonts/Manrope-400.ttf") format("truetype");
+      font-weight: 400;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: Manrope;
+      src: url("assets/fonts/Manrope-600.ttf") format("truetype");
+      font-weight: 600;
+      font-display: swap;
+    }
     :root {
       --px: 0;
       --py: 0;
@@ -22,7 +43,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: "Outfit", system-ui, sans-serif;
+      font-family: Manrope, system-ui, sans-serif;
       background: #2a2624;
       color: var(--ivory);
     }
@@ -85,7 +106,7 @@
     .bg-photo .frame {
       position: absolute;
       inset: -8%;
-      background: #2a2624 url("assets/leme-studio.jpg") center / cover no-repeat;
+      background: #2a2624 url("assets/leme-studio-reformer.jpg") center / cover no-repeat;
       transform:
         translate3d(calc(var(--px) * -12px), calc(var(--py) * -8px + var(--scroll) * 4%), 0)
         scale(calc(1.18 - var(--scroll) * 0.12));
@@ -114,8 +135,8 @@
     }
 
     h1 {
-      font-family: "Bodoni Moda", serif;
-      font-weight: 500;
+      font-family: Fraunces, serif;
+      font-weight: 700;
       font-size: clamp(3.4rem, 8vw, 5.5rem);
       letter-spacing: -0.03em;
       line-height: 0.9;
@@ -135,8 +156,8 @@
 
     .panel h2 {
       margin-bottom: 0.8rem;
-      font-family: "Bodoni Moda", serif;
-      font-weight: 500;
+      font-family: Fraunces, serif;
+      font-weight: 700;
       font-size: clamp(1.8rem, 4vw, 2.4rem);
       letter-spacing: -0.03em;
     }
@@ -173,7 +194,7 @@
     }
 
     .quote {
-      font-family: "Bodoni Moda", serif;
+      font-family: Fraunces, serif;
       font-size: clamp(1.45rem, 3vw, 1.9rem);
       line-height: 1.25;
       color: var(--ivory);

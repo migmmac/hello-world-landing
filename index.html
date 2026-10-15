@@ -4,11 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Leme Pilates</title>
-  <meta name="description" id="meta-desc" content="Leme Pilates — estúdio de Pilates em Lisboa. Encontra o teu eixo. Pilates, barre e movement, com a Laura.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="description" id="meta-desc" content="Leme Pilates — estúdio de Pilates em Lisboa. Encontra o teu eixo. Reformer, Cadillac e movement, com a Laura.">
   <style>
+    @font-face {
+      font-family: Fraunces;
+      src: url("assets/fonts/Fraunces-400.ttf") format("truetype");
+      font-weight: 400;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: Fraunces;
+      src: url("assets/fonts/Fraunces-700.ttf") format("truetype");
+      font-weight: 700;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: Manrope;
+      src: url("assets/fonts/Manrope-400.ttf") format("truetype");
+      font-weight: 400;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: Manrope;
+      src: url("assets/fonts/Manrope-600.ttf") format("truetype");
+      font-weight: 600;
+      font-display: swap;
+    }
     :root {
       --mx: 50%;
       --my: 50%;
@@ -25,7 +46,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: "Outfit", system-ui, sans-serif;
+      font-family: Manrope, system-ui, sans-serif;
       background: #2a2624;
       color: var(--ivory);
     }
@@ -73,7 +94,7 @@
     .bg-photo .frame {
       position: absolute;
       inset: -8%;
-      background: #2a2624 url("assets/leme-studio.jpg") center / cover no-repeat;
+      background: #2a2624 url("assets/leme-studio-reformer.jpg") center / cover no-repeat;
       transform:
         translate3d(calc(var(--px) * -12px), calc(var(--py) * -8px + var(--scroll) * 4%), 0)
         scale(calc(1.18 - var(--scroll) * 0.12));
@@ -104,24 +125,14 @@
     .hero-content { max-width: 40rem; }
 
     .wordmark {
-      font-family: "Bodoni Moda", "Times New Roman", serif;
-      font-weight: 500;
-      font-size: clamp(5.4rem, 16vw, 8.6rem);
-      line-height: 0.78;
-      letter-spacing: -0.045em;
-      color: var(--ivory);
-      text-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      margin: 0;
     }
 
-    .wordmark span {
+    .wordmark img {
+      width: min(22rem, 78vw);
+      height: auto;
       display: block;
-      margin-top: 0.85rem;
-      padding-left: 0.15em;
-      font-family: "Outfit", system-ui, sans-serif;
-      font-size: 0.16em;
-      font-weight: 500;
-      letter-spacing: 0.46em;
-      line-height: 1;
+      filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.28));
     }
 
     .tagline {
@@ -189,8 +200,8 @@
 
     .panel h2 {
       margin-bottom: 0.85rem;
-      font-family: "Bodoni Moda", serif;
-      font-weight: 500;
+      font-family: Fraunces, serif;
+      font-weight: 700;
       font-size: clamp(2rem, 4vw, 2.7rem);
       letter-spacing: -0.03em;
       line-height: 1;
@@ -227,9 +238,9 @@
 
     .quote {
       max-width: 18ch;
-      font-family: "Bodoni Moda", serif;
+      font-family: Fraunces, serif;
       font-size: clamp(2.1rem, 5vw, 3.2rem);
-      font-weight: 500;
+      font-weight: 700;
       line-height: 0.95;
       letter-spacing: -0.03em;
     }
@@ -261,7 +272,7 @@
   <main class="page">
     <header class="hero">
       <div class="hero-content">
-        <h1 class="wordmark">leme<span>Pilates</span></h1>
+        <h1 class="wordmark"><img src="assets/leme-logo-marfim.png" alt="Leme Pilates"></h1>
         <p class="tagline" data-i18n="tagline">Encontra o teu eixo.</p>
         <p class="lead" data-i18n="lead">Estúdio de Pilates em Lisboa — para se sentir mais livre no seu corpo, com força, mobilidade e elegância ao longo da vida.</p>
         <div class="cta-row">
@@ -275,15 +286,15 @@
     <section class="section" id="estudio">
       <div class="panel">
         <h2 data-i18n="studioTitle">O estúdio</h2>
-        <p class="support" data-i18n="studioSupport">Pilates, barre e movement. Um lugar calmo, em microcimento e bordeaux, para voltar ao corpo com precisão.</p>
+        <p class="support" data-i18n="studioSupport">Reformer, Cadillac e movement. Um lugar calmo, em microcimento e bordeaux, para voltar ao corpo com precisão.</p>
         <ul class="offer-list">
           <li>
-            <h3>Pilates</h3>
+            <h3>Reformer</h3>
             <p data-i18n="pilatesText">Sessões precisas, no reformer e no solo, para controlo, força e leveza.</p>
           </li>
           <li>
-            <h3>Barre</h3>
-            <p data-i18n="barreText">Linha longa, postura e resistência — o mesmo eixo, outro ritmo.</p>
+            <h3>Cadillac</h3>
+            <p data-i18n="cadillacText">Suspensão, amplitude e controlo — o corpo a encontrar o eixo no ar.</p>
           </li>
           <li>
             <h3>Movement</h3>
@@ -327,16 +338,16 @@
       const buttons = document.querySelectorAll(".lang-toggle [data-lang]");
       const copy = {
         pt: {
-          meta: "Leme Pilates — estúdio de Pilates em Lisboa. Encontra o teu eixo. Pilates, barre e movement, com a Laura.",
+          meta: "Leme Pilates — estúdio de Pilates em Lisboa. Encontra o teu eixo. Reformer, Cadillac e movement, com a Laura.",
           tagline: "Encontra o teu eixo.",
           lead: "Estúdio de Pilates em Lisboa — para se sentir mais livre no seu corpo, com força, mobilidade e elegância ao longo da vida.",
           ctaBook: "Marcar",
           ctaStudio: "O estúdio",
           ctaLaura: "A instrutora",
           studioTitle: "O estúdio",
-          studioSupport: "Pilates, barre e movement. Um lugar calmo, em microcimento e bordeaux, para voltar ao corpo com precisão.",
-          pilatesText: "Sessões precisas, no reformer e no solo, para controlo, força e leveza.",
-          barreText: "Linha longa, postura e resistência — o mesmo eixo, outro ritmo.",
+          studioSupport: "Reformer, Cadillac e movement. Um lugar calmo, em microcimento e bordeaux, para voltar ao corpo com precisão.",
+          pilatesText: "Sessões precisas, no reformer, para controlo, força e leveza.",
+          cadillacText: "Suspensão, amplitude e controlo — o corpo a encontrar o eixo no ar.",
           moveText: "Mobilidade e presença, para o dia a dia ficar mais disponível.",
           ritual: "O teu próximo ritual.",
           lauraTitle: "A instrutora",
@@ -346,16 +357,16 @@
           contactSupport: "O Leme está em Lisboa. Fale connosco para reservar o seu lugar."
         },
         en: {
-          meta: "Leme Pilates — a Pilates studio in Lisbon. Find your axis. Pilates, barre and movement, with Laura.",
+          meta: "Leme Pilates — a Pilates studio in Lisbon. Find your axis. Reformer, Cadillac and movement, with Laura.",
           tagline: "Find your axis.",
           lead: "A Pilates studio in Lisbon — so you can feel freer in your body, with strength, mobility and grace for the long run.",
           ctaBook: "Book",
           ctaStudio: "The studio",
           ctaLaura: "The instructor",
           studioTitle: "The studio",
-          studioSupport: "Pilates, barre and movement. A quiet room, in microcement and oxblood, for coming back to the body with precision.",
-          pilatesText: "Precise sessions, on the reformer and the mat, for control, strength and ease.",
-          barreText: "Long lines, posture and stamina — the same axis, another rhythm.",
+          studioSupport: "Reformer, Cadillac and movement. A quiet room, in microcement and oxblood, for coming back to the body with precision.",
+          pilatesText: "Precise sessions on the reformer, for control, strength and ease.",
+          cadillacText: "Suspension, range and control — the body finding its axis in the air.",
           moveText: "Mobility and presence, so everyday movement feels available again.",
           ritual: "Your next ritual.",
           lauraTitle: "The instructor",
